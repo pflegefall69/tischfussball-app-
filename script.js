@@ -1,71 +1,81 @@
- const app = document.getElementById('app');
-    const players = [];
-    let matches = [];
+const app = document.getElementById('app');
 
-    function render() {
-      app.innerHTML = `
-        <input id="playerInput" placeholder="Spieler hinzufügen" />
-        <button onclick="addPlayer()">Hinzufügen</button>
+let players = JSON.parse(localStorage.getItem('players')) || [];
+let teams = JSON.parse(localStorage.getItem('teams')) || [];
+let matches = JSON.parse(localStorage.getItem('matches')) || [];
 
-        <h3>Spieler:</h3>
-        <ul>
-          ${players.map(p => `<li>${p}</li>`).join('')}
-        </ul>
+function saveState() {
+  localStorage.setItem('players', JSON.stringify(players));
+  localStorage.setItem('teams', JSON.stringify(teams));
+  localStorage.setItem('matches', JSON.stringify(matches));
+}
 
-        <button onclick="generateMatches()" ${players.length < 4 ? 'disabled' : ''}>
-          Matches generieren
-        </button>
+function addPlayer() {
+  const input = document.getElementById('playerInput');
+  const name = input.value.trim();
+  if (name) {
+    players.push(name);
+    input.value = '';
+    buildTeamsAndMatches();
+  }
+}
 
-        ${matches.length > 0 ? `
-          <h3>Matches:</h3>
-          <ul>
-            ${matches.map((match, i) => `
-              <li>
-                Runde ${match.round}: 
-                [${match.team1.join(' & ')}] vs [${match.team2.join(' & ')}] <br/>
-                Ergebnis: 
-                <input 
-                  type="text" 
-                  value="${match.result || ''}" 
-                  placeholder="z. B. 5:3" 
-                  oninput="updateResult(${i}, this.value)"
-                />
-              </li>
-            `).join('')}
-          </ul>
-        ` : ''}
-      `;
-    }
+function buildTeamsAndMatches() {
+  const shuffledPlayers = [...players].sort(() => Math.random() - 0.5);
+  teams = [];
+  matches = [];
 
-    function addPlayer() {
-      const input = document.getElementById('playerInput');
-      const name = input.value.trim();
-      if (name) {
-        players.push(name);
-        input.value = '';
-        render();
-      }
-    }
+  // Teams bilden (2er-Teams)
+  for (let i = 0; i + 1 < shuffledPlayers.length; i += 2) {
+    teams.push([shuffledPlayers[i], shuffledPlayers[i + 1]]);
+  }
 
-    function generateMatches() {
-      const shuffled = [...players].sort(() => Math.random() - 0.5);
-      matches = [];
-      let round = 1;
+  // Matches aus Teams bilden (Team vs Team)
+  const shuffledTeams = [...teams].sort(() => Math.random() - 0.5);
+  for (let i = 0; i + 1 < shuffledTeams.length; i += 2) {
+    matches.push({
+      team1: shuffledTeams[i],
+      team2: shuffledTeams[i + 1],
+      result: ''
+    });
+  }
 
-      for (let i = 0; i + 3 < shuffled.length; i += 4) {
-        matches.push({
-          round: round++,
-          team1: [shuffled[i], shuffled[i + 1]],
-          team2: [shuffled[i + 2], shuffled[i + 3]],
-          result: ''
-        });
-      }
+  saveState();
+  render();
+}
 
-      render();
-    }
+function updateResult(index, value) {
+  matches[index].result = value;
+  saveState();
+}
 
-    function updateResult(index, value) {
-      matches[index].result = value;
-    }
+function render() {
+  let html = `
+    <input id="playerInput" placeholder="Spielername" />
+    <button onclick="addPlayer()">Spieler hinzufügen</button>
 
-    render();
+    <h3>Spieler (${players.length}):</h3>
+    <ul>
+      ${players.map(p => `<li>${p}</li>`).join('')}
+    </ul>
+  `;
+
+  if (matches.length > 0) {
+    html += `
+      <h3>Spiele:</h3>
+      <ul>
+        ${matches.map((match, i) => `
+          <li>
+            [${match.team1.join(' & ')}] vs [${match.team2.join(' & ')}] <br/>
+            Ergebnis: <input type="text" value="${match.result}" placeholder="z.B. 5:3" 
+            oninput="updateResult(${i}, this.value)" />
+          </li>
+        `).join('')}
+      </ul>
+    `;
+  }
+
+  app.innerHTML = html;
+}
+
+render();
