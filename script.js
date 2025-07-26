@@ -14,7 +14,7 @@ function render() {
     </ul>
 
     <button onclick="generateMatches()" ${players.length < 4 ? 'disabled' : ''}>
-      Spielplan erstellen
+      Matches generieren
     </button>
 
     ${matches.length > 0 ? `
@@ -24,11 +24,12 @@ function render() {
           <li>
             Runde ${match.round}: 
             [${match.team1.join(' & ')}] vs [${match.team2.join(' & ')}] <br/>
-            <input
-              type="text"
-              placeholder="Ergebnis (z. B. 5:3)"
-              value="${match.result || ''}"
-              oninput="updateResult(${i}, this.value)"
+            Ergebnis: 
+            <input 
+              type="text" 
+              placeholder="z. B. 5:3"
+              value="${match.result}" 
+              oninput="updateResult(${i}, this.value)" 
             />
           </li>
         `).join('')}
@@ -50,36 +51,13 @@ function addPlayer() {
 function generateMatches() {
   const shuffled = [...players].sort(() => Math.random() - 0.5);
   matches = [];
-  const usedPlayers = new Set();
-
   let round = 1;
-  const available = [...shuffled];
 
-  while (available.length >= 4) {
-    // Ziehe 4 zufällige Spieler (2 Teams)
-    const group = available.splice(0, 4);
-    const team1 = [group[0], group[1]];
-    const team2 = [group[2], group[3]];
-
-    matches.push({
-      round,
-      team1,
-      team2,
-      result: ''
-    });
-
-    round++;
-    team1.forEach(p => usedPlayers.add(p));
-    team2.forEach(p => usedPlayers.add(p));
-  }
-
-  // Spieler, die noch nicht gespielt haben → weitere Runden planen
-  const remaining = players.filter(p => !usedPlayers.has(p));
-  for (let i = 0; i + 3 < remaining.length; i += 4) {
+  for (let i = 0; i + 3 < shuffled.length; i += 4) {
     matches.push({
       round: round++,
-      team1: [remaining[i], remaining[i + 1]],
-      team2: [remaining[i + 2], remaining[i + 3]],
+      team1: [shuffled[i], shuffled[i + 1]],
+      team2: [shuffled[i + 2], shuffled[i + 3]],
       result: ''
     });
   }
