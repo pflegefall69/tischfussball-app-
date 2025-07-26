@@ -1,7 +1,7 @@
 const app = document.getElementById('app');
 
 const players = [];
-let pairs = [];
+let teamMatches = [];
 
 function render() {
   app.innerHTML = `
@@ -13,14 +13,18 @@ function render() {
       ${players.map(p => `<li>${p}</li>`).join('')}
     </ul>
 
-    <button onclick="generatePairs()" ${players.length < 2 ? 'disabled' : ''}>
-      Zufällige Paarung
+    <button onclick="generateTeamMatches()" ${players.length < 4 ? 'disabled' : ''}>
+      2er-Teams zufällig paaren
     </button>
 
-    ${pairs.length > 0 ? `
-      <h3>Paarungen:</h3>
+    ${teamMatches.length > 0 ? `
+      <h3>Team-Matches:</h3>
       <ul>
-        ${pairs.map(pair => `<li>${pair[0]} vs ${pair[1] || 'Freilos'}</li>`).join('')}
+        ${teamMatches.map(match => `
+          <li>
+            [${match.team1.join(' & ')}] vs [${match.team2.join(' & ')}]
+          </li>
+        `).join('')}
       </ul>
     ` : ''}
   `;
@@ -28,19 +32,25 @@ function render() {
 
 function addPlayer() {
   const input = document.getElementById('playerInput');
-  if (input.value.trim()) {
-    players.push(input.value.trim());
+  const name = input.value.trim();
+  if (name) {
+    players.push(name);
     input.value = '';
     render();
   }
 }
 
-function generatePairs() {
+function generateTeamMatches() {
   const shuffled = [...players].sort(() => Math.random() - 0.5);
-  pairs = [];
-  for (let i = 0; i < shuffled.length; i += 2) {
-    pairs.push([shuffled[i], shuffled[i + 1] || null]);
+  teamMatches = [];
+
+  // Nur vollständige Teams bilden (4er-Blöcke)
+  for (let i = 0; i + 3 < shuffled.length; i += 4) {
+    const team1 = [shuffled[i], shuffled[i + 1]];
+    const team2 = [shuffled[i + 2], shuffled[i + 3]];
+    teamMatches.push({ team1, team2 });
   }
+
   render();
 }
 
