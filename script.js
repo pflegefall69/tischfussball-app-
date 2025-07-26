@@ -73,10 +73,7 @@ function render() {
         `).join('')}
       </ul>
     `;
-  }
 
-  app.innerHTML = html;
-  if (matches.length > 0) {
     const scores = calculateLeaderboard();
 
     html += `
@@ -87,7 +84,9 @@ function render() {
     `;
   }
 
+  app.innerHTML = html;
 }
+
 function calculateLeaderboard() {
   const scoreMap = {};
 
