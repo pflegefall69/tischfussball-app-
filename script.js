@@ -1,28 +1,35 @@
 const app = document.getElementById('app');
 
 const players = [];
-let teamMatches = [];
+let matches = [];
 
 function render() {
   app.innerHTML = `
     <input id="playerInput" placeholder="Spieler hinzufügen" />
     <button onclick="addPlayer()">Hinzufügen</button>
-    
+
     <h3>Spieler:</h3>
     <ul>
       ${players.map(p => `<li>${p}</li>`).join('')}
     </ul>
 
-    <button onclick="generateTeamMatches()" ${players.length < 4 ? 'disabled' : ''}>
-      2er-Teams zufällig paaren
+    <button onclick="generateMatches()" ${players.length < 4 ? 'disabled' : ''}>
+      Spielplan erstellen
     </button>
 
-    ${teamMatches.length > 0 ? `
-      <h3>Team-Matches:</h3>
+    ${matches.length > 0 ? `
+      <h3>Matches:</h3>
       <ul>
-        ${teamMatches.map(match => `
+        ${matches.map((match, i) => `
           <li>
-            [${match.team1.join(' & ')}] vs [${match.team2.join(' & ')}]
+            Runde ${match.round}: 
+            [${match.team1.join(' & ')}] vs [${match.team2.join(' & ')}] <br/>
+            <input
+              type="text"
+              placeholder="Ergebnis (z. B. 5:3)"
+              value="${match.result || ''}"
+              oninput="updateResult(${i}, this.value)"
+            />
           </li>
         `).join('')}
       </ul>
@@ -40,18 +47,46 @@ function addPlayer() {
   }
 }
 
-function generateTeamMatches() {
+function generateMatches() {
   const shuffled = [...players].sort(() => Math.random() - 0.5);
-  teamMatches = [];
+  matches = [];
+  const usedPlayers = new Set();
 
-  // Nur vollständige Teams bilden (4er-Blöcke)
-  for (let i = 0; i + 3 < shuffled.length; i += 4) {
-    const team1 = [shuffled[i], shuffled[i + 1]];
-    const team2 = [shuffled[i + 2], shuffled[i + 3]];
-    teamMatches.push({ team1, team2 });
+  let round = 1;
+  const available = [...shuffled];
+
+  while (available.length >= 4) {
+    // Ziehe 4 zufällige Spieler (2 Teams)
+    const group = available.splice(0, 4);
+    const team1 = [group[0], group[1]];
+    const team2 = [group[2], group[3]];
+
+    matches.push({
+      round,
+      team1,
+      team2,
+      result: ''
+    });
+
+    round++;
+    team1.forEach(p => usedPlayers.add(p));
+    team2.forEach(p => usedPlayers.add(p));
+  }
+
+  // Spieler, die noch nicht gespielt haben → weitere Runden planen
+  const remaining = players.filter(p => !usedPlayers.has(p));
+  for (let i = 0; i + 3 < remaining.length; i += 4) {
+    matches.push({
+      round: round++,
+      team1: [remaining[i], remaining[i + 1]],
+      team2: [remaining[i + 2], remaining[i + 3]],
+      result: ''
+    });
   }
 
   render();
 }
 
-render();
+function updateResult(index, value) {
+  matches[index].result = value;
+}
