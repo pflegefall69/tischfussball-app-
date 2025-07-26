@@ -18,9 +18,20 @@ function render() {
     </button>
 
     ${pairs.length > 0 ? `
-      <h3>Paarungen:</h3>
+      <h3>Paarungen + Ergebnis:</h3>
       <ul>
-        ${pairs.map(pair => `<li>${pair[0]} vs ${pair[1] || 'Freilos'}</li>`).join('')}
+        ${pairs.map((pair, index) => `
+          <li>
+            ${pair.player1} vs ${pair.player2 || 'Freilos'}<br/>
+            <input
+              type="text"
+              placeholder="Ergebnis z. B. 5:3"
+              value="${pair.result || ''}"
+              oninput="updateResult(${index}, this.value)"
+              ${!pair.player2 ? 'disabled' : ''}
+            />
+          </li>
+        `).join('')}
       </ul>
     ` : ''}
   `;
@@ -38,10 +49,18 @@ function addPlayer() {
 function generatePairs() {
   const shuffled = [...players].sort(() => Math.random() - 0.5);
   pairs = [];
+
   for (let i = 0; i < shuffled.length; i += 2) {
-    pairs.push([shuffled[i], shuffled[i + 1] || null]);
+    pairs.push({
+      player1: shuffled[i],
+      player2: shuffled[i + 1] || null,
+      result: ''
+    });
   }
+
   render();
 }
 
-render();
+function updateResult(index, value) {
+  pairs[index].result = value;
+}
