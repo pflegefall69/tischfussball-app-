@@ -76,7 +76,10 @@ function updateResult(index, value) {
 
 function calculateScores() {
   const scores = {};
-  players.forEach(p => scores[p] = 0);
+  const excluded = new Set([tournamentLeader, ...extras]);
+  players.forEach(p => {
+    if (!excluded.has(p)) scores[p] = 0;
+  });
 
   matches.forEach(match => {
     if (!match.result || !match.result.includes(":")) return;
@@ -84,12 +87,12 @@ function calculateScores() {
     if (isNaN(s1) || isNaN(s2)) return;
 
     if (s1 > s2) {
-      match.team1.forEach(p => scores[p] += 1);
+      match.team1.forEach(p => { if (!excluded.has(p)) scores[p] += 1; });
     } else if (s2 > s1) {
-      match.team2.forEach(p => scores[p] += 1);
+      match.team2.forEach(p => { if (!excluded.has(p)) scores[p] += 1; });
     } else {
-      match.team1.forEach(p => scores[p] += 0.5);
-      match.team2.forEach(p => scores[p] += 0.5);
+      match.team1.forEach(p => { if (!excluded.has(p)) scores[p] += 0.5; });
+      match.team2.forEach(p => { if (!excluded.has(p)) scores[p] += 0.5; });
     }
   });
 
