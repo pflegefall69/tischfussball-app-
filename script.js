@@ -1,122 +1,144 @@
-const app = document.getElementById('app');
+// Datenstrukturen
+let tournamentLeader = null;
+let players = [];
+let teams = [];
+let matches = [];
+let extras = [];
 
-let players = JSON.parse(localStorage.getItem('players')) || [];
-let teams = JSON.parse(localStorage.getItem('teams')) || [];
-let matches = JSON.parse(localStorage.getItem('matches')) || [];
+const app = document.getElementById("app");
 
-function saveState() {
-  localStorage.setItem('players', JSON.stringify(players));
-  localStorage.setItem('teams', JSON.stringify(teams));
-  localStorage.setItem('matches', JSON.stringify(matches));
+function renderLeaderInput() {
+  app.innerHTML = `
+    <h2>Turnierleitung eintragen</h2>
+    <input id="leaderInput" placeholder="Name der Turnierleitung" />
+    <button onclick="setLeader()">Bestätigen</button>
+  `;
+}
+
+function setLeader() {
+  const input = document.getElementById("leaderInput");
+  const name = input.value.trim();
+  if (name) {
+    tournamentLeader = name;
+    renderPlayerInput();
+  }
+}
+
+function renderPlayerInput() {
+  app.innerHTML = `
+    <h2>Spieler eintragen</h2>
+    <input id="playerInput" placeholder="Spielername" />
+    <button onclick="addPlayer()">Hinzufügen</button>
+    <ul>
+      ${players.map(p => `<li>${p}</li>`).join("")}
+    </ul>
+    <button onclick="startTournament()" ${players.length < 4 ? 'disabled' : ''}>Turnier starten</button>
+  `;
 }
 
 function addPlayer() {
-  const input = document.getElementById('playerInput');
+  const input = document.getElementById("playerInput");
   const name = input.value.trim();
   if (name) {
     players.push(name);
-    input.value = '';
-    buildTeamsAndMatches();
+    renderPlayerInput();
   }
 }
 
-function buildTeamsAndMatches() {
-  const shuffledPlayers = [...players].sort(() => Math.random() - 0.5);
+function startTournament() {
+  const shuffled = [...players].sort(() => Math.random() - 0.5);
   teams = [];
   matches = [];
+  extras = [];
 
-  // Teams bilden (2er-Teams)
-  for (let i = 0; i + 1 < shuffledPlayers.length; i += 2) {
-    teams.push([shuffledPlayers[i], shuffledPlayers[i + 1]]);
+  // 2er Teams bilden
+  while (shuffled.length >= 2) {
+    teams.push([shuffled.pop(), shuffled.pop()]);
   }
 
-  // Matches aus Teams bilden (Team vs Team)
-  const shuffledTeams = [...teams].sort(() => Math.random() - 0.5);
-  for (let i = 0; i + 1 < shuffledTeams.length; i += 2) {
-    matches.push({
-      team1: shuffledTeams[i],
-      team2: shuffledTeams[i + 1],
-      result: ''
-    });
+  // Matches: jedes Team spielt genau einmal gegen jedes andere Team
+  for (let i = 0; i < teams.length; i++) {
+    for (let j = i + 1; j < teams.length; j++) {
+      matches.push({ team1: teams[i], team2: teams[j], result: "" });
+    }
   }
 
-  saveState();
-  render();
+  // Übrige Spieler = extras
+  extras = shuffled;
+
+  renderTournament();
 }
 
 function updateResult(index, value) {
   matches[index].result = value;
-  saveState();
+  renderTournament();
 }
 
-function render() {
-  let html = `
-    <input id="playerInput" placeholder="Spielername" />
-    <button onclick="addPlayer()">Spieler hinzufügen</button>
-    <button onclick="buildTeamsAndMatches()" ${players.length < 4 ? 'disabled' : ''}>
-      Spielplan neu generieren
-    </button>
-  `;
-
-
-  if (matches.length > 0) {
-    html += `
-      <h3>Spiele:</h3>
-      <ul>
-        ${matches.map((match, i) => `
-          <li>
-            [${match.team1.join(' & ')}] vs [${match.team2.join(' & ')}] <br/>
-            Ergebnis: <input type="text" value="${match.result}" placeholder="z.B. 5:3" 
-            oninput="updateResult(${i}, this.value)" />
-          </li>
-        `).join('')}
-      </ul>
-    `;
-
-    const scores = calculateLeaderboard();
-
-    html += `
-      <h3>Rangliste:</h3>
-      <ol>
-        ${scores.map(player => `<li>${player.name}: ${player.points} Punkte</li>`).join('')}
-      </ol>
-    `;
-  }
-
-  app.innerHTML = html;
-}
-
-function calculateLeaderboard() {
-  const scoreMap = {};
-
-  // Alle Spieler starten mit 0 Punkten
-  players.forEach(name => scoreMap[name] = 0);
+function calculateScores() {
+  const scores = {};
+  players.forEach(p => scores[p] = 0);
 
   matches.forEach(match => {
-    if (!match.result || !match.result.includes(':')) return;
+    if (!match.result || !match.result.includes(":")) return;
+    const [s1, s2] = match.result.split(":").map(n => parseInt(n.trim()));
+    if (isNaN(s1) || isNaN(s2)) return;
 
-    const [score1, score2] = match.result.split(':').map(s => parseInt(s.trim()));
-
-    if (isNaN(score1) || isNaN(score2)) return;
-
-    if (score1 === score2) {
-      // Unentschieden → 0.5 Punkte für alle
-      match.team1.forEach(player => scoreMap[player] += 0.5);
-      match.team2.forEach(player => scoreMap[player] += 0.5);
-    } else if (score1 > score2) {
-      // Team 1 gewinnt
-      match.team1.forEach(player => scoreMap[player] += 1);
+    if (s1 > s2) {
+      match.team1.forEach(p => scores[p] += 1);
+    } else if (s2 > s1) {
+      match.team2.forEach(p => scores[p] += 1);
     } else {
-      // Team 2 gewinnt
-      match.team2.forEach(player => scoreMap[player] += 1);
+      match.team1.forEach(p => scores[p] += 0.5);
+      match.team2.forEach(p => scores[p] += 0.5);
     }
   });
 
-  // Rückgabe: sortiertes Array [{ name, points }]
-  return Object.entries(scoreMap)
+  return Object.entries(scores)
     .map(([name, points]) => ({ name, points }))
     .sort((a, b) => b.points - a.points);
 }
 
+function renderTournament() {
+  let html = `<h2>Turnier gestartet</h2>`;
+  html += `<p><strong>Turnierleitung:</strong> ${tournamentLeader}</p>`;
 
-render();
+  html += `<h3>Teams:</h3><ul>`;
+  teams.forEach(t => {
+    html += `<li>${t[0]} & ${t[1]}</li>`;
+  });
+  html += `</ul>`;
+
+  html += `<h3>Matches:</h3><ul>`;
+  matches.forEach((m, i) => {
+    html += `<li>${m.team1[0]} & ${m.team1[1]} vs ${m.team2[0]} & ${m.team2[1]}<br/>
+      Ergebnis: <input type="text" value="${m.result}" onchange="updateResult(${i}, this.value)" /></li>`;
+  });
+  html += `</ul>`;
+
+  html += `<h3>Aufgabenverteilung:</h3><ul>`;
+  if (extras.length === 1) {
+    html += `<li>${extras[0]} ist Schiedsrichter, Helfer und Trinker</li>`;
+  } else if (extras.length === 2) {
+    html += `<li>${extras[0]} ist Schiedsrichter</li>`;
+    html += `<li>${extras[1]} ist Helfer</li>`;
+    html += `<li>Turnierleitung (${tournamentLeader}) ist Trinker</li>`;
+  } else if (extras.length === 3) {
+    html += `<li>${extras[0]} ist Schiedsrichter</li>`;
+    html += `<li>${extras[1]} ist Helfer</li>`;
+    html += `<li>${extras[2]} ist Trinker</li>`;
+  } else if (extras.length === 0) {
+    html += `<li>Turnierleitung (${tournamentLeader}) ist Schiedsrichter, Helfer und Trinker</li>`;
+  }
+  html += `</ul>`;
+
+  const leaderboard = calculateScores();
+  html += `<h3>Rangliste:</h3><ol>`;
+  leaderboard.forEach(entry => {
+    html += `<li>${entry.name}: ${entry.points} Punkte</li>`;
+  });
+  html += `</ol>`;
+
+  app.innerHTML = html;
+}
+
+renderLeaderInput();
