@@ -4,7 +4,7 @@ const players = [];
 let pairs = [];
 
 function render() {
-  app.innerHTML = `
+  let html = `
     <input id="playerInput" placeholder="Spieler hinzufügen" />
     <button onclick="addPlayer()">Hinzufügen</button>
     
@@ -16,8 +16,10 @@ function render() {
     <button onclick="generatePairs()" ${players.length < 2 ? 'disabled' : ''}>
       Zufällige Paarung
     </button>
+  `;
 
-    ${pairs.length > 0 ? `
+  if (pairs.length > 0) {
+    html += `
       <h3>Paarungen + Ergebnis:</h3>
       <ul>
         ${pairs.map((pair, index) => `
@@ -33,14 +35,17 @@ function render() {
           </li>
         `).join('')}
       </ul>
-    ` : ''}
-  `;
+    `;
+  }
+
+  app.innerHTML = html;
 }
 
 function addPlayer() {
   const input = document.getElementById('playerInput');
-  if (input.value.trim()) {
-    players.push(input.value.trim());
+  const name = input.value.trim();
+  if (name) {
+    players.push(name);
     input.value = '';
     render();
   }
