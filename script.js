@@ -76,6 +76,49 @@ function render() {
   }
 
   app.innerHTML = html;
+  if (matches.length > 0) {
+    const scores = calculateLeaderboard();
+
+    html += `
+      <h3>Rangliste:</h3>
+      <ol>
+        ${scores.map(player => `<li>${player.name}: ${player.points} Punkte</li>`).join('')}
+      </ol>
+    `;
+  }
+
 }
+function calculateLeaderboard() {
+  const scoreMap = {};
+
+  // Alle Spieler starten mit 0 Punkten
+  players.forEach(name => scoreMap[name] = 0);
+
+  matches.forEach(match => {
+    if (!match.result || !match.result.includes(':')) return;
+
+    const [score1, score2] = match.result.split(':').map(s => parseInt(s.trim()));
+
+    if (isNaN(score1) || isNaN(score2)) return;
+
+    if (score1 === score2) {
+      // Unentschieden → 0.5 Punkte für alle
+      match.team1.forEach(player => scoreMap[player] += 0.5);
+      match.team2.forEach(player => scoreMap[player] += 0.5);
+    } else if (score1 > score2) {
+      // Team 1 gewinnt
+      match.team1.forEach(player => scoreMap[player] += 1);
+    } else {
+      // Team 2 gewinnt
+      match.team2.forEach(player => scoreMap[player] += 1);
+    }
+  });
+
+  // Rückgabe: sortiertes Array [{ name, points }]
+  return Object.entries(scoreMap)
+    .map(([name, points]) => ({ name, points }))
+    .sort((a, b) => b.points - a.points);
+}
+
 
 render();
