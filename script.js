@@ -53,12 +53,11 @@ function render() {
   let html = `
     <input id="playerInput" placeholder="Spielername" />
     <button onclick="addPlayer()">Spieler hinzufügen</button>
-
-    <h3>Spieler (${players.length}):</h3>
-    <ul>
-      ${players.map(p => `<li>${p}</li>`).join('')}
-    </ul>
+    <button onclick="buildTeamsAndMatches()" ${players.length < 4 ? 'disabled' : ''}>
+      Spielplan neu generieren
+    </button>
   `;
+
 
   if (matches.length > 0) {
     html += `
