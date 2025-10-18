@@ -22,7 +22,15 @@ function setLeader() {
     renderPlayerInput();
   }
 }
-
+// Render the link buttons
+function renderLearningButtons() {
+  let html = '<div style="margin-top:10px;">';
+  learningLinks.forEach(link => {
+    html += `<button onclick="window.open('${link.url}', '_blank')">${link.label}</button> `;
+  });
+  html += '</div>';
+  return html;
+}
 // Function to open the learning page
 function openLearn() {
   window.open("learn.html", "_blank");
@@ -151,5 +159,6 @@ function renderTournament() {
 }
 
 renderLeaderInput();
+
 
 
