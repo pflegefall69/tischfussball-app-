@@ -22,19 +22,22 @@ function setLeader() {
     tournamentLeader = name;
     renderPlayerInput();
   }
+
+function openLearn() {
+  window.open("learn.html", "_blank");
 }
 
-function renderPlayerInput() {
+function renderLeaderInput() {
   app.innerHTML = `
-    <h2>Spieler eintragen</h2>
-    <input id="playerInput" placeholder="Spielername" />
-    <button onclick="addPlayer()">Hinzufügen</button>
-    <ul>
-      ${players.map(p => `<li>${p}</li>`).join("")}
-    </ul>
-    <button onclick="startTournament()" ${players.length < 4 ? 'disabled' : ''}>Turnier starten</button>
+    <h2>Turnierleitung eintragen</h2>
+    <input id="leaderInput" placeholder="Name der Turnierleitung" />
+    <div style="margin-top: 10px;">
+      <button onclick="setLeader()">Bestätigen</button>
+      <button onclick="openLearn()">Lernbereich öffnen</button>
+    </div>
   `;
 }
+
 
 function addPlayer() {
   const input = document.getElementById("playerInput");
