@@ -45,9 +45,13 @@ function renderLeaderInput() {
       <button onclick="setLeader()">Bestätigen</button>
       <button onclick="openLearn()">Lernbereich öffnen</button>
     </div>
-    
+    <div id="learningButtonsContainer"></div>
   `;
+
+  // Buttons nachladen
+  document.getElementById("learningButtonsContainer").innerHTML = renderLearningButtons();
 }
+
 
 
 
@@ -160,6 +164,7 @@ function renderTournament() {
 }
 
 renderLeaderInput();
+
 
 
 
