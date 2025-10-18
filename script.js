@@ -51,6 +51,17 @@ function renderLeaderInput() {
   // Buttons nachladen
   document.getElementById("learningButtonsContainer").innerHTML = renderLearningButtons();
 }
+function renderPlayerInput() {
+  app.innerHTML = `
+    <h2>Spieler eintragen</h2>
+    <input id="playerInput" placeholder="Spielername" />
+    <button onclick="addPlayer()">Hinzufügen</button>
+    <ul id="playerList">
+      ${players.map(p => `<li>${p}</li>`).join("")}
+    </ul>
+    <button onclick="startTournament()" ${players.length < 4 ? "disabled" : ""}>Turnier starten</button>
+  `;
+}
 
 
 
@@ -164,6 +175,7 @@ function renderTournament() {
 }
 
 renderLeaderInput();
+
 
 
 
