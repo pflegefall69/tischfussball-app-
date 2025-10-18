@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <title>Lernbereich</title>
+  <style>
+    body { font-family: sans-serif; text-align: center; padding: 2rem; }
+    #diagramContainer { width: 90%; margin: 0 auto; border: 1px solid #ccc; }
+    svg { width: 100%; height: auto; }
+    #info { margin-top: 1rem; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <h1>Lernbereich – Turnierdiagramm</h1>
+  <p><a href="/">Zurück zur App</a></p>
+
+  <!-- Embed SVG -->
+  <div id="diagramContainer">
+    <object id="diagram" type="image/svg+xml" data="TischkickerSchema.svg"></object>
+  </div>
+
+  <div id="info">Klicke auf ein Feld, um Details zu sehen.</div>
+
+  <script>
+    const obj = document.getElementById('diagram');
+    const infoBox = document.getElementById('info');
+
+    obj.addEventListener('load', () => {
+      const svgDoc = obj.contentDocument; // Access the SVG DOM
+      const nodes = svgDoc.querySelectorAll('[id]'); // Select all elements with IDs
+
+      nodes.forEach(node => {
+        node.style.cursor = 'pointer';
+        node.addEventListener('click', () => {
+          // Display the clicked element's ID
+          infoBox.textContent = 'Geklickt: ' + node.id;
+
+          // TODO: Here you can fetch tournament data or show more info
+          // Example:
+          // if(node.id.startsWith('team-1')) { showTeamInfo(1); }
+        });
+      });
+    });
+  </script>
+</body>
+</html>
