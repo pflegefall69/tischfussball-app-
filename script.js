@@ -6,15 +6,6 @@ let matches = [];
 let extras = [];
 
 const app = document.getElementById("app");
-
-function renderLeaderInput() {
-  app.innerHTML = `
-    <h2>Turnierleitung eintragen</h2>
-    <input id="leaderInput" placeholder="Name der Turnierleitung" />
-    <button onclick="setLeader()">Bestätigen</button>
-  `;
-}
-
 function setLeader() {
   const input = document.getElementById("leaderInput");
   const name = input.value.trim();
@@ -22,11 +13,14 @@ function setLeader() {
     tournamentLeader = name;
     renderPlayerInput();
   }
+}
 
+// Function to open the learning page
 function openLearn() {
   window.open("learn.html", "_blank");
 }
 
+// Render the first input screen
 function renderLeaderInput() {
   app.innerHTML = `
     <h2>Turnierleitung eintragen</h2>
@@ -37,6 +31,7 @@ function renderLeaderInput() {
     </div>
   `;
 }
+
 
 
 function addPlayer() {
@@ -148,3 +143,4 @@ function renderTournament() {
 }
 
 renderLeaderInput();
+
