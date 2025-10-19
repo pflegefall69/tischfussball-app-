@@ -28,11 +28,11 @@ function renderStartPage() {
     <div style="margin-top: 20px;">
       <button onclick="renderLeaderInput()">Turnierbereich</button>
       <button onclick="openLearn()">Lernbereich</button>
-      <button onclick="alert('Trainingsbereich kommt bald!')">Trainingsbereich</button>
-      <div id="learningButtonsContainer"></div>
-    </div>
-    
+      <button onclick="alert('Trainingsbereich kommt bald!')">Trainingsbereich</button>      
+    </div>    
   `;
+    // Lern-Buttons nachladen
+  document.getElementById("learningButtonsContainer").innerHTML = renderLearningButtons();
 }
 
 // Render the link buttons
@@ -187,6 +187,7 @@ function renderTournament() {
 
 
 renderStartPage();
+
 
 
 
