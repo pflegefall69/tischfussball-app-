@@ -29,8 +29,9 @@ function renderStartPage() {
       <button onclick="renderLeaderInput()">Turnierbereich</button>
       <button onclick="openLearn()">Lernbereich</button>
       <button onclick="alert('Trainingsbereich kommt bald!')">Trainingsbereich</button>
+      <div id="learningButtonsContainer"></div>
     </div>
-    <div id="learningButtonsContainer"></div>
+    
   `;
 }
 
@@ -186,6 +187,7 @@ function renderTournament() {
 
 
 renderStartPage();
+
 
 
 
