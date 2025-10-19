@@ -28,8 +28,8 @@ function renderStartPage() {
     <div style="margin-top: 20px;">
       <button onclick="renderLeaderInput()">Turnierbereich</button>
       <button onclick="openLearn()">Lernbereich</button>
-      <button onclick="alert('Trainingsbereich kommt bald!')">Trainingsbereich</button> 
-       ${renderLearningButtons()}
+      <button onclick="renderTraining()">Trainingsbereich</button> 
+      ${renderLearningButtons()}
     </div>    
   `;
 }
@@ -72,7 +72,28 @@ function renderPlayerInput() {
     <button onclick="startTournament()" ${players.length < 4 ? "disabled" : ""}>Turnier starten</button>
   `;
 }
+// Trainingsbereich anzeigen
+function renderTraining() {
+  app.innerHTML = `
+    <h2>Trainingsbereich</h2>
+    <p>Wähle ein Training:</p>
+    <div style="margin-top: 10px;">
+      <button onclick="startTraining('Schusstechnik Training 3er')">Schusstechnik Training 3er</button><br/><br/>
+      <button onclick="startTraining('Passtechnik Training 5er')">Passtechnik Training 5er</button><br/><br/>
+      <button onclick="startTraining('Passtechnik Training 2er')">Passtechnik Training 2er</button><br/><br/>
+    </div>
+    <button style="margin-top: 20px;" onclick="renderStartPage()">Zurück zur Startseite</button>
+  `;
+}
 
+// Dummy-Funktion für Trainingsstart (später ausbaufähig)
+function startTraining(name) {
+  app.innerHTML = `
+    <h2>${name}</h2>
+    <p>Hier kommen bald Übungen, Videos oder Trainingsanleitungen.</p>
+    <button onclick="renderTraining()">Zurück</button>
+  `;
+}
 
 
 
@@ -186,6 +207,7 @@ function renderTournament() {
 
 
 renderStartPage();
+
 
 
 
