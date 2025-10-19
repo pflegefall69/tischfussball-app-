@@ -30,6 +30,7 @@ function renderStartPage() {
       <button onclick="openLearn()">Lernbereich</button>
       <button onclick="alert('Trainingsbereich kommt bald!')">Trainingsbereich</button>
     </div>
+    <div id="learningButtonsContainer"></div>
   `;
 }
 
@@ -53,10 +54,8 @@ function renderLeaderInput() {
     <h2>Turnierleitung eintragen</h2>
     <input id="leaderInput" placeholder="Name der Turnierleitung" />
     <div style="margin-top: 10px;">
-      <button onclick="setLeader()">Bestätigen</button>
-      <button onclick="openLearn()">Lernbereich öffnen</button>
-    </div>
-    <div id="learningButtonsContainer"></div>
+      <button onclick="setLeader()">Bestätigen</button>      
+    </div>    
   `;
 
   // Buttons nachladen
@@ -187,6 +186,7 @@ function renderTournament() {
 
 
 renderStartPage();
+
 
 
 
