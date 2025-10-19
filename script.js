@@ -22,6 +22,17 @@ function setLeader() {
     renderPlayerInput();
   }
 }
+function renderStartPage() {
+  app.innerHTML = `
+    <h1>Willkommen zum Kicker-Tool</h1>
+    <div style="margin-top: 20px;">
+      <button onclick="renderLeaderInput()">Turnierbereich</button>
+      <button onclick="openLearn()">Lernbereich</button>
+      <button onclick="alert('Trainingsbereich kommt bald!')">Trainingsbereich</button>
+    </div>
+  `;
+}
+
 // Render the link buttons
 function renderLearningButtons() {
   let html = '<div style="margin-top:10px;">';
@@ -174,7 +185,8 @@ function renderTournament() {
   app.innerHTML = html;
 }
 
-renderLeaderInput();
+
+renderStartPage();
 
 
 
