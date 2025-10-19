@@ -24,7 +24,7 @@ function setLeader() {
 }
 function renderStartPage() {
   app.innerHTML = `
-    <h1>Willkommen zum Kicker-Tool</h1>
+    <h1>Willkommen bei der Tischfussball-app</h1>
     <div style="margin-top: 20px;">
       <button onclick="renderLeaderInput()">Turnierbereich</button>
       <button onclick="openLearn()">Lernbereich</button>
@@ -187,6 +187,7 @@ function renderTournament() {
 
 
 renderStartPage();
+
 
 
 
