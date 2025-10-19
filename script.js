@@ -10,7 +10,8 @@ const learningLinks = [
   { label: "kicker-klaus", url: "https://kicker-klaus.de/?srsltid=AfmBOopLCoc6FaqguC586p0foKIhJP2bZvEcBJlvPTEI0Lgw10VD_pH2" },
   { label: "leonhart", url: "https://original-leonhart.com/" },
   { label: "ullrichsport", url: "https://shop.ullrichsport.com/" },
-  { label: "bonzini", url: "https://www.bonzini.com/en/" }
+  { label: "bonzini", url: "https://www.bonzini.com/en/" },
+  { label: "tornado", url: "https://tornadofoosball.com/" }
 ];
 
 
@@ -208,6 +209,7 @@ function renderTournament() {
 
 
 renderStartPage();
+
 
 
 
