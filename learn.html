@@ -5,42 +5,75 @@
   <title>Lernbereich</title>
   <style>
     body { font-family: sans-serif; text-align: center; padding: 2rem; }
-    #diagramContainer { width: 90%; margin: 0 auto; border: 1px solid #ccc; }
+    h1 { margin-bottom: 1rem; }
+    #diagramContainer { width: 90%; margin: 0 auto; border: 1px solid #ccc; margin-bottom: 2rem; }
     svg { width: 100%; height: auto; }
-    #info { margin-top: 1rem; font-weight: bold; }
+    a { text-decoration: none; color: #007bff; }
+    .training-section { margin-bottom: 2rem; text-align: left; max-width: 800px; margin-left: auto; margin-right: auto; }
+    .shot-item { margin-bottom: 1.5rem; padding: 1rem; border: 1px solid #ddd; border-radius: 8px; background-color: #f9f9f9; }
+    .shot-item img { max-width: 100%; border-radius: 8px; margin-top: 10px; display: block; }
+    .positions { font-weight: bold; margin-top: 0.5rem; }
   </style>
 </head>
 <body>
   <h1>Lernbereich</h1>
   <p><a href="/">Zurück zur App</a></p>
 
-  <!-- Embed SVG -->
+  <!-- SVG Diagramm -->
   <div id="diagramContainer">
     <object id="diagram" type="image/svg+xml" data="TischkickerSchema.svg"></object>
   </div>
 
-  <div id="info">Klicke auf ein Feld, um Details zu sehen.</div>
+  <!-- Trainingsliste -->
+  <div id="trainingsList"></div>
 
   <script>
-    const obj = document.getElementById('diagram');
-    const infoBox = document.getElementById('info');
+    // Trainingsdaten
+    const trainingsData = {
+      "Schusstechnik Training 3er": [
+        { name: "Jet", desc: "Auch bekannt als Snake-Shot. Kurbeln, max 360 Grad vor und nach dem Schuss. Der Ball kann auch mit einer Seitwärtsbewegung der ballführenden Miniatur vor dem Schuss in die gewünschte Schussposition befördert werden. Durch kontinuierlichen Kontakt zwischen Griff und Unterarm/Handfläche/Handballen wird Kontrolle über die Kurbelbewegung gewährleistet.", img: "img/jet_shot.png", start: "GM9", target: "T1" },
+        { name: "Pull Shot", desc: "Ball wird zur Seite gezogen und dann geschossen. Klassischer Power-Schuss von der 3er-Reihe.", img: "img/pull_shot.png", start: "GM10", target: "T2" },
+        { name: "Push Shot", desc: "Ball wird nach außen gedrückt und dann geschossen. Spiegelseitig zum Pull Shot.", img: "img/push_shot.png", start: "GM11", target: "T3" },
+        { name: "Pin Shot", desc: "Auch 'Front Pin' genannt. Der Ball wird mit der Figur festgeklemmt und dann schnell nach hinten weggerollt und geschossen.", img: "img/pin_shot.png", start: "GM9", target: "T4" },
+        { name: "Pull Kick", desc: "Der Ball wird von GM9 zu GM10 gepasst und ohne zu stoppen geschossen.", img: "img/pull_kick.png", start: "GM9", target: "T5" },
+        { name: "Push Kick", desc: "Der Ball wird von GM11 zu GM10 gepasst und ohne zu stoppen geschossen.", img: "img/push_kick.png", start: "GM11", target: "T1" }
+      ],
+      "Passtechnik Training 5er": [
+        { name: "Tic-Tac Pass", desc: "Ball wird zwischen Figuren hin und her gespielt, um Lücken zu finden. Anschließend wird ein Pull Kick/Push Kick ausgeführt, welcher bei einer Miniatur der 3er Reihe landen soll.", img: "img/tic_tac_pass.png", start: "GM10", target: "T2" },
+        { name: "Stick Pass", desc: "Schneller Pass durch eine Lücke, mit minimaler Bewegung. Der Ball wird durch eine Seitwärtsbewegung der Miniatur während des Schusskontaktes angeschnitten.", img: "img/stick_pass.png", start: "GM11", target: "T3" }
+      ],
+      "Passtechnik Training 2er": [
+        { name: "Bank Pass", desc: "Ball wird über die Bande gespielt, um den Gegner zu überraschen.", img: "img/bank_pass.png", start: "GM9", target: "T4" },
+        { name: "Wall Pass", desc: "Ball entlang der Bande durch den Gegner gepasst.", img: "img/wall_pass.png", start: "GM10", target: "T5" }
+      ]
+    };
 
-    obj.addEventListener('load', () => {
-      const svgDoc = obj.contentDocument; // Access the SVG DOM
-      const nodes = svgDoc.querySelectorAll('[id]'); // Select all elements with IDs
+    const container = document.getElementById('trainingsList');
 
-      nodes.forEach(node => {
-        node.style.cursor = 'pointer';
-        node.addEventListener('click', () => {
-          // Display the clicked element's ID
-          infoBox.textContent = 'Geklickt: ' + node.id;
+    // Trainingsliste rendern
+    for (const [sectionName, shots] of Object.entries(trainingsData)) {
+      const sectionDiv = document.createElement('div');
+      sectionDiv.className = 'training-section';
+      const title = document.createElement('h2');
+      title.textContent = sectionName;
+      sectionDiv.appendChild(title);
 
-          // TODO: Here you can fetch tournament data or show more info
-          // Example:
-          // if(node.id.startsWith('team-1')) { showTeamInfo(1); }
-        });
+      shots.forEach(shot => {
+        const shotDiv = document.createElement('div');
+        shotDiv.className = 'shot-item';
+
+        shotDiv.innerHTML = `
+          <h3>${shot.name}</h3>
+          <p>${shot.desc}</p>
+          <p class="positions">Start: ${shot.start} → Ziel: ${shot.target}</p>
+          <img src="${shot.img}" alt="${shot.name}">
+        `;
+
+        sectionDiv.appendChild(shotDiv);
       });
-    });
+
+      container.appendChild(sectionDiv);
+    }
   </script>
 </body>
 </html>
