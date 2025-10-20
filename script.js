@@ -193,16 +193,7 @@ function showShotInfo(index, trainingName) {
   document.getElementById("shotInfo").innerHTML = infoHtml;
 }
 
-  const infoHtml = `
-    <p><strong>Schusstechnik:</strong> ${shot.name}</p>
-    <p>${shot.desc}</p>
-    <p><strong>Startposition:</strong> ${start} &nbsp; <strong>Zielposition:</strong> ${target}</p>
-    <p><strong>Ballführender Spieler:</strong> ${ballHandler} &nbsp; <strong>Schütze:</strong> ${shooter}</p>
-    ${shot.img ? `<img src="${shot.img}" alt="${shot.name}" />` : ""}
-  `;
 
-  document.getElementById("shotInfo").innerHTML = infoHtml;
-}
 
 
 function addPlayer() {
@@ -315,6 +306,7 @@ function renderTournament() {
 
 
 renderStartPage();
+
 
 
 
