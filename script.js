@@ -161,12 +161,35 @@ function renderTraining() {
   `;
 }
 
-// Dummy-Funktion für Trainingsstart (später ausbaufähig)
+// Trainingsbereich anzeigen
 function startTraining(name) {
-  app.innerHTML = `
-    <h2>${name}</h2>
-    <p>Hier kommen bald Übungen, Videos oder Trainingsanleitungen.</p>
-    <button onclick="renderTraining()">Zurück</button>
+  const exercises = trainingsData[name] || [];
+
+  // Generiere die Liste der Übungen
+  let html = `<h2>${name}</h2>`;
+  html += `<ul>`;
+  exercises.forEach((exercise, i) => {
+    html += `
+      <li style="margin-bottom: 1rem; cursor: pointer;" onclick="showExercise('${name}', ${i})">
+        ${exercise.name}
+      </li>
+    `;
+  });
+  html += `</ul>`;
+  html += `<div id="exerciseDetails" style="margin-top: 20px;"></div>`;
+  html += `<button style="margin-top: 20px;" onclick="renderTraining()">Zurück</button>`;
+
+  app.innerHTML = html;
+}
+
+// Einzelne Übung anzeigen
+function showExercise(trainingName, index) {
+  const exercise = trainingsData[trainingName][index];
+  const detailsDiv = document.getElementById("exerciseDetails");
+  detailsDiv.innerHTML = `
+    <h3>${exercise.name}</h3>
+    <p>${exercise.desc}</p>
+    ${exercise.img ? `<img src="${exercise.img}" alt="${exercise.name}" style="max-width: 400px; margin-top: 10px;">` : ""}
   `;
 }
 
@@ -282,6 +305,7 @@ function renderTournament() {
 
 
 renderStartPage();
+
 
 
 
