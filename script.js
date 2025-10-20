@@ -161,6 +161,7 @@ function renderTraining() {
   `;
 }
 
+
 // Trainingsbereich anzeigen
 function startTraining(name) {
   const exercises = trainingsData[name] || [];
@@ -181,6 +182,41 @@ function startTraining(name) {
 
   app.innerHTML = html;
 }
+
+// Einzelne Übung anzeigen
+function showExercise(trainingName, index) {
+  const exercise = trainingsData[trainingName][index];
+  const detailsDiv = document.getElementById("exerciseDetails");
+  detailsDiv.innerHTML = `
+    <h3>${exercise.name}</h3>
+    <p>${exercise.desc}</p>
+    ${exercise.img ? `<img src="${exercise.img}" alt="${exercise.name}" style="max-width: 400px; margin-top: 10px;">` : ""}
+  `;
+}
+
+// Einzelne Übung anzeigen
+function showExercise(trainingName, index) {
+  const exercise = trainingsData[trainingName][index];
+  const detailsDiv = document.getElementById("exerciseDetails");
+  detailsDiv.innerHTML = `
+    <h3>${exercise.name}</h3>
+    <p>${exercise.desc}</p>
+    ${exercise.img ? `<img src="${exercise.img}" alt="${exercise.name}" style="max-width: 400px; margin-top: 10px;">` : ""}
+  `;
+}
+
+
+// Einzelne Übung anzeigen
+function showExercise(trainingName, index) {
+  const exercise = trainingsData[trainingName][index];
+  const detailsDiv = document.getElementById("exerciseDetails");
+  detailsDiv.innerHTML = `
+    <h3>${exercise.name}</h3>
+    <p>${exercise.desc}</p>
+    ${exercise.img ? `<img src="${exercise.img}" alt="${exercise.name}" style="max-width: 400px; margin-top: 10px;">` : ""}
+  `;
+}
+
 
 // Einzelne Übung anzeigen
 function showExercise(trainingName, index) {
@@ -305,6 +341,7 @@ function renderTournament() {
 
 
 renderStartPage();
+
 
 
 
