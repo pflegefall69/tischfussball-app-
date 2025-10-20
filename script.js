@@ -168,46 +168,37 @@ function startTraining(name) {
 
   app.innerHTML = html;
 }
-
 function showShotInfo(index, trainingName) {
   const shot = trainingsData[trainingName][index];
 
+  // Bestimme die Positionen abhängig von der Trainingsreihe
+  let possiblePositions = [];
+  if (trainingName.includes("3er")) possiblePositions = ["T1", "T2", "T3", "T4", "T5"];
+  if (trainingName.includes("5er")) possiblePositions = ["T1", "T2", "T3", "T4", "T5"];
+  if (trainingName.includes("2er")) possiblePositions = ["T1", "T2", "T3", "T4", "T5"]; // ggf. einschränken
+
   let start, target;
 
-  // Bestimme die Start- und Zielposition je nach Schusstyp
   if (shot.name.includes("Push")) {
-    // Push-Shots: Start > Ziel (absteigende Richtung)
-    start = randomPosition();
-    let startIndex = positions.indexOf(start);
-    // Ziel nur kleiner als Start
-    const possibleTargets = positions.slice(0, startIndex);
-    if (possibleTargets.length === 0) {
-      target = start; // fallback, falls Start = T1
-    } else {
-      target = possibleTargets[Math.floor(Math.random() * possibleTargets.length)];
-    }
+    start = possiblePositions[Math.floor(Math.random() * possiblePositions.length)];
+    let startIndex = possiblePositions.indexOf(start);
+    const possibleTargets = possiblePositions.slice(0, startIndex);
+    target = possibleTargets.length > 0 ? possibleTargets[Math.floor(Math.random() * possibleTargets.length)] : start;
   } else if (shot.name.includes("Pull")) {
-    // Pull-Shots: Start < Ziel (aufsteigende Richtung)
-    start = randomPosition();
-    let startIndex = positions.indexOf(start);
-    // Ziel nur größer als Start
-    const possibleTargets = positions.slice(startIndex + 1);
-    if (possibleTargets.length === 0) {
-      target = start; // fallback, falls Start = T5
-    } else {
-      target = possibleTargets[Math.floor(Math.random() * possibleTargets.length)];
-    }
+    start = possiblePositions[Math.floor(Math.random() * possiblePositions.length)];
+    let startIndex = possiblePositions.indexOf(start);
+    const possibleTargets = possiblePositions.slice(startIndex + 1);
+    target = possibleTargets.length > 0 ? possibleTargets[Math.floor(Math.random() * possibleTargets.length)] : start;
   } else {
-    // Andere Shots: beliebige Start- und Zielposition
-    start = randomPosition();
+    start = possiblePositions[Math.floor(Math.random() * possiblePositions.length)];
     do {
-      target = randomPosition();
+      target = possiblePositions[Math.floor(Math.random() * possiblePositions.length)];
     } while (target === start);
   }
 
-  // Spieler aus Trainingsdaten
-  const ballHandler = shot.ballHandler;
-  const shooter = shot.shooter;
+  // Spieler aus Trainingsdaten oder default
+  const ballHandler = shot.ballHandler || "GM10";
+  const shooter = shot.shooter || "GM10";
 
   const infoHtml = `
     <div class="shot-item">
@@ -339,6 +330,7 @@ function renderTournament() {
 
 
 renderStartPage();
+
 
 
 
