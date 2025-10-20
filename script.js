@@ -15,7 +15,7 @@ const learningLinks = [
   { label: "garlando/kicker-sven", url: "https://kicker-sven.de/kicker-marken-garlando"},
   { label: "roberto-sport/kicker-sven", url: "https://kicker-sven.de/kicker-marken-roberto-sport"}
 ];
-
+const threeRowPlayers = ["GM9", "GM10", "GM11"];
 
 const app = document.getElementById("app");
 function setLeader() {
@@ -320,6 +320,7 @@ function renderTournament() {
 
 
 renderStartPage();
+
 
 
 
