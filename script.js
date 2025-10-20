@@ -173,30 +173,28 @@ function startTraining(name) {
 function showShotInfo(index, trainingName) {
   const shot = trainingsData[trainingName][index];
 
-  // Bestimme die Positionen abhängig von der Trainingsreihe
-  let possiblePositions = ["T1", "T2", "T3", "T4", "T5"];
-  
   let start, target;
 
+  // Push/Pull Logik
   if (shot.name.includes("Push")) {
-    start = possiblePositions[Math.floor(Math.random() * possiblePositions.length)];
-    let startIndex = possiblePositions.indexOf(start);
-    const possibleTargets = possiblePositions.slice(0, startIndex);
+    start = positions[Math.floor(Math.random() * positions.length)];
+    let startIndex = positions.indexOf(start);
+    const possibleTargets = positions.slice(0, startIndex);
     target = possibleTargets.length > 0 ? possibleTargets[Math.floor(Math.random() * possibleTargets.length)] : start;
   } else if (shot.name.includes("Pull")) {
-    start = possiblePositions[Math.floor(Math.random() * possiblePositions.length)];
-    let startIndex = possiblePositions.indexOf(start);
-    const possibleTargets = possiblePositions.slice(startIndex + 1);
+    start = positions[Math.floor(Math.random() * positions.length)];
+    let startIndex = positions.indexOf(start);
+    const possibleTargets = positions.slice(startIndex + 1);
     target = possibleTargets.length > 0 ? possibleTargets[Math.floor(Math.random() * possibleTargets.length)] : start;
   } else {
-    start = possiblePositions[Math.floor(Math.random() * possiblePositions.length)];
+    start = positions[Math.floor(Math.random() * positions.length)];
     do {
-      target = possiblePositions[Math.floor(Math.random() * possiblePositions.length)];
+      target = positions[Math.floor(Math.random() * positions.length)];
     } while (target === start);
   }
 
-  const ballHandler = shot.ballHandler || "GM10";
-  const shooter = shot.shooter || "GM10";
+  const ballHandler = shot.ballHandler;
+  const shooter = shot.shooter;
 
   const infoHtml = `
     <div class="shot-item">
@@ -210,9 +208,9 @@ function showShotInfo(index, trainingName) {
         <strong>Schütze:</strong> ${shooter}
       </p>
 
-      <!-- Diagramm über dem Zurück-Button -->
-      <div style="margin-top:20px; text-align:center;">
-        <img src="3barshots.svg" alt="3er Reihe Diagramm" style="max-width:90%; height:auto; border:1px solid #ccc; border-radius:8px;" />
+      <!-- Container für Diagramm mit dunklem Hintergrund -->
+      <div style="background-color:#222; padding:15px; border-radius:10px; margin-top:20px; text-align:center;">
+        <img src="3barshots.svg" alt="3er Reihe Diagramm" style="max-width:90%; height:auto;" />
       </div>
     </div>
   `;
@@ -333,6 +331,7 @@ function renderTournament() {
 
 
 renderStartPage();
+
 
 
 
