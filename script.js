@@ -11,7 +11,9 @@ const learningLinks = [
   { label: "leonhart", url: "https://original-leonhart.com/" },
   { label: "ullrichsport", url: "https://shop.ullrichsport.com/" },
   { label: "bonzini", url: "https://www.bonzini.com/en/" },
-  { label: "tornado", url: "https://tornadofoosball.com/" }
+  { label: "tornado", url: "https://tornadofoosball.com/" },
+  { label: "garlando/kicker-sven", url: "https://kicker-sven.de/kicker-marken-garlando/"},
+  { label: "roberto-sport/kicker-sven", url: "https://kicker-sven.de/kicker-marken-roberto-sport/"}
 ];
 
 
@@ -280,6 +282,7 @@ function renderTournament() {
 
 
 renderStartPage();
+
 
 
 
