@@ -169,7 +169,6 @@ function startTraining(name) {
   app.innerHTML = html;
 }
 
-// Zeigt Info zu einem Schuss mit zufälligen Positionen und vorgegebenen Spielern
 function showShotInfo(index, trainingName) {
   const shot = trainingsData[trainingName][index];
 
@@ -178,19 +177,26 @@ function showShotInfo(index, trainingName) {
   let target = randomPosition();
   while(target === start) target = randomPosition();
 
-  // Spieler werden aus den Trainingsdaten geholt
+  // Spieler aus Trainingsdaten
   const ballHandler = shot.ballHandler;
   const shooter = shot.shooter;
 
- const infoHtml = `
-  <div class="shot-item">
-    <p><strong>Schusstechnik:</strong> ${shot.name}</p>
-    <p>${shot.desc}</p>
-    <p class="positions">Startposition: ${start} &nbsp; Zielposition: ${target}</p>
-    <p class="positions">Ballführender Spieler: ${ballHandler} &nbsp; Schütze: ${shooter}</p>
-    ${shot.img ? `<img src="${shot.img}" alt="${shot.name}" />` : ""}
-  </div>
-`;
+  const infoHtml = `
+    <div class="shot-item">
+      <p><strong>Schusstechnik:</strong> ${shot.name}</p>
+      <p class="positions">
+        <strong>Startposition:</strong> ${start} &nbsp; 
+        <strong>Zielposition:</strong> ${target}
+      </p>
+      <p class="positions">
+        <strong>Ballführender Spieler:</strong> ${ballHandler} &nbsp; 
+        <strong>Schütze:</strong> ${shooter}
+      </p>
+    </div>
+  `;
+
+  document.getElementById("shotInfo").innerHTML = infoHtml;
+}
 
 
   document.getElementById("shotInfo").innerHTML = infoHtml;
@@ -309,6 +315,7 @@ function renderTournament() {
 
 
 renderStartPage();
+
 
 
 
