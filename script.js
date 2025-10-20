@@ -173,10 +173,26 @@ function renderTraining() {
   `;
 }
 
-
 // Trainingsbereich mit Buttons für Schüsse in der 3er-Reihe
 function startTraining(name) {
   const training = trainingsData[name];
+
+  // Wenn das Training noch nicht vollständig implementiert ist
+  if (name === "Passtechnik Training 5er" || name === "Passtechnik Training 2er") {
+    let html = `<h2>${name}</h2>`;
+    html += `
+      <div style="margin-top:30px; padding:20px; background:#222; color:#fff; border-radius:10px; max-width:600px; margin-left:auto; margin-right:auto;">
+        <p style="font-size:1.1em; text-align:center;">
+          Dieses Training wird noch erstellt 🔧
+        </p>
+      </div>
+      <button style="margin-top: 40px;" onclick="renderTraining()">Zurück</button>
+    `;
+    app.innerHTML = html;
+    return; // restliche Funktion überspringen
+  }
+
+  // Wenn Trainingsdaten vorhanden, normale Anzeige
   if (!training) return;
 
   let html = `<h2>${name}</h2>`;
@@ -356,6 +372,7 @@ function renderTournament() {
 
 
 renderStartPage();
+
 
 
 
