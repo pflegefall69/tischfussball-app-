@@ -199,10 +199,6 @@ function showShotInfo(index, trainingName) {
 }
 
 
-  document.getElementById("shotInfo").innerHTML = infoHtml;
-}
-
-
 
 
 function addPlayer() {
@@ -315,6 +311,7 @@ function renderTournament() {
 
 
 renderStartPage();
+
 
 
 
