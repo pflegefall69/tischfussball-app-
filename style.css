@@ -6,3 +6,19 @@ body {
 h1 {
   color: #333;
 }
+
+#shotInfo {
+  margin-top: 20px;
+  font-weight: normal;
+  text-align: left;
+  white-space: pre-wrap; /* Lange Texte umbrechen */
+  max-width: 600px;      /* maximale Breite für bessere Lesbarkeit */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#shotInfo img {
+  max-width: 100%;
+  margin-top: 10px;
+  border-radius: 8px;
+}
