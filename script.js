@@ -172,10 +172,38 @@ function startTraining(name) {
 function showShotInfo(index, trainingName) {
   const shot = trainingsData[trainingName][index];
 
-  // Zufällige Start- und Zielposition
-  const start = randomPosition();
-  let target = randomPosition();
-  while(target === start) target = randomPosition();
+  let start, target;
+
+  // Bestimme die Start- und Zielposition je nach Schusstyp
+  if (shot.name.includes("Push")) {
+    // Push-Shots: Start > Ziel (absteigende Richtung)
+    start = randomPosition();
+    let startIndex = positions.indexOf(start);
+    // Ziel nur kleiner als Start
+    const possibleTargets = positions.slice(0, startIndex);
+    if (possibleTargets.length === 0) {
+      target = start; // fallback, falls Start = T1
+    } else {
+      target = possibleTargets[Math.floor(Math.random() * possibleTargets.length)];
+    }
+  } else if (shot.name.includes("Pull")) {
+    // Pull-Shots: Start < Ziel (aufsteigende Richtung)
+    start = randomPosition();
+    let startIndex = positions.indexOf(start);
+    // Ziel nur größer als Start
+    const possibleTargets = positions.slice(startIndex + 1);
+    if (possibleTargets.length === 0) {
+      target = start; // fallback, falls Start = T5
+    } else {
+      target = possibleTargets[Math.floor(Math.random() * possibleTargets.length)];
+    }
+  } else {
+    // Andere Shots: beliebige Start- und Zielposition
+    start = randomPosition();
+    do {
+      target = randomPosition();
+    } while (target === start);
+  }
 
   // Spieler aus Trainingsdaten
   const ballHandler = shot.ballHandler;
@@ -311,6 +339,7 @@ function renderTournament() {
 
 
 renderStartPage();
+
 
 
 
