@@ -74,6 +74,31 @@ const trainingsData = {
     }
   ],
   // Passtechnik Trainings ähnlich erweitern ...
+  "Passtechnik Training 5er": [
+    { 
+      name: "Tic-Tac Pass", 
+      desc: "Ball wird zwischen Figuren hin und her gespielt, um Lücken zu finden. Anschließend wird ein Pull Kick/Push Kick ausgeführt, welcher bei einer Miniatur der 3er Reihe landen soll.", 
+      img: "img/tic_tac_pass.png" 
+    },
+    { 
+      name: "Stick Pass", 
+      desc: "Schneller Pass durch eine Lücke, mit minimaler Bewegung. Der Ball wird durch eine Seitwärtsbewegung der Miniatur während des Schusskontaktes angeschnitten.", 
+      img: "img/stick_pass.png" 
+    }
+  ],
+  
+  "Passtechnik Training 2er": [
+    { 
+      name: "Bank Pass", 
+      desc: "Ball wird über die Bande gespielt, um den Gegner zu überraschen.", 
+      img: "img/bank_pass.png" 
+    },
+    { 
+      name: "Wall Pass", 
+      desc: "Ball entlang der Bande durch den Gegner gepasst.", 
+      img: "img/wall_pass.png" 
+    }
+  ]
 };
 
 // Mögliche Tischpositionen
@@ -331,6 +356,7 @@ function renderTournament() {
 
 
 renderStartPage();
+
 
 
 
