@@ -168,15 +168,14 @@ function startTraining(name) {
 
   app.innerHTML = html;
 }
+
+
 function showShotInfo(index, trainingName) {
   const shot = trainingsData[trainingName][index];
 
   // Bestimme die Positionen abhängig von der Trainingsreihe
-  let possiblePositions = [];
-  if (trainingName.includes("3er")) possiblePositions = ["T1", "T2", "T3", "T4", "T5"];
-  if (trainingName.includes("5er")) possiblePositions = ["T1", "T2", "T3", "T4", "T5"];
-  if (trainingName.includes("2er")) possiblePositions = ["T1", "T2", "T3", "T4", "T5"]; // ggf. einschränken
-
+  let possiblePositions = ["T1", "T2", "T3", "T4", "T5"];
+  
   let start, target;
 
   if (shot.name.includes("Push")) {
@@ -196,7 +195,6 @@ function showShotInfo(index, trainingName) {
     } while (target === start);
   }
 
-  // Spieler aus Trainingsdaten oder default
   const ballHandler = shot.ballHandler || "GM10";
   const shooter = shot.shooter || "GM10";
 
@@ -211,6 +209,11 @@ function showShotInfo(index, trainingName) {
         <strong>Ballführender Spieler:</strong> ${ballHandler} &nbsp; 
         <strong>Schütze:</strong> ${shooter}
       </p>
+
+      <!-- Diagramm über dem Zurück-Button -->
+      <div style="margin-top:20px; text-align:center;">
+        <img src="3barshots.svg" alt="3er Reihe Diagramm" style="max-width:90%; height:auto; border:1px solid #ccc; border-radius:8px;" />
+      </div>
     </div>
   `;
 
@@ -330,6 +333,7 @@ function renderTournament() {
 
 
 renderStartPage();
+
 
 
 
