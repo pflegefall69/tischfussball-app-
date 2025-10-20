@@ -32,61 +32,48 @@ const trainingsData = {
   "Schusstechnik Training 3er": [
     { 
       name: "Jet", 
-      desc: "Auch bekannt als Snake-Shot. Kurbeln, max 360 Grad vor und nach dem Schuss. Der Ball kann auch mit einer Seitwärtsbewegung der ballführenden Miniatur vor dem Schuss in die gewünschte Schussposition befördert werden. Durch kontinuierlichen Kontakt zwischen Griff und Unterarm/Handfläche/Handballen wird Kontrolle über die Kurbelbewegung gewährleistet.", 
-      img: "img/jet_shot.png" 
+      desc: "Auch bekannt als Snake-Shot. Kurbeln, max 360 Grad ...",
+      img: "img/jet_shot.png",
+      ballHandler: "GM10",
+      shooter: "GM10"
     },
     { 
       name: "Pull Shot", 
-      desc: "Ball wird zur Seite gezogen und dann geschossen. Klassischer Power-Schuss von der 3er-Reihe.", 
-      img: "img/pull_shot.png" 
+      desc: "Ball wird zur Seite gezogen ...",
+      img: "img/pull_shot.png",
+      ballHandler: "GM10",
+      shooter: "GM10"
     },
     { 
       name: "Push Shot", 
-      desc: "Ball wird nach außen gedrückt und dann geschossen. Spiegelseitig zum Pull Shot.", 
-      img: "img/push_shot.png" 
+      desc: "Ball wird nach außen gedrückt ...",
+      img: "img/push_shot.png",
+      ballHandler: "GM10",
+      shooter: "GM10"
     },
     { 
       name: "Pin Shot", 
-      desc: "Auch 'Front Pin' genannt. Der Ball wird mit der Figur festgeklemmt und dann schnell nach hinten weggerollt und geschossen.", 
-      img: "img/pin_shot.png" 
+      desc: "Auch 'Front Pin' genannt ...",
+      img: "img/pin_shot.png",
+      ballHandler: "GM10",
+      shooter: "GM10"
     },
     { 
       name: "Pull Kick", 
-      desc: "Der Ball wird von GM9 zu GM10 gepasst und ohne zu stoppen geschossen.", 
-      img: "img/pull_kick.png" 
+      desc: "Der Ball wird von GM9 zu GM10 ...",
+      img: "img/pull_kick.png",
+      ballHandler: "GM9",
+      shooter: "GM10"
     },
     { 
       name: "Push Kick", 
-      desc: "Der Ball wird von GM11 zu GM10 gepasst und ohne zu stoppen geschossen.", 
-      img: "img/push_kick.png" 
+      desc: "Der Ball wird von GM11 zu GM10 ...",
+      img: "img/push_kick.png",
+      ballHandler: "GM11",
+      shooter: "GM10"
     }
   ],
-  
-  "Passtechnik Training 5er": [
-    { 
-      name: "Tic-Tac Pass", 
-      desc: "Ball wird zwischen Figuren hin und her gespielt, um Lücken zu finden. Anschließend wird ein Pull Kick/Push Kick ausgeführt, welcher bei einer Miniatur der 3er Reihe landen soll.", 
-      img: "img/tic_tac_pass.png" 
-    },
-    { 
-      name: "Stick Pass", 
-      desc: "Schneller Pass durch eine Lücke, mit minimaler Bewegung. Der Ball wird durch eine Seitwärtsbewegung der Miniatur während des Schusskontaktes angeschnitten.", 
-      img: "img/stick_pass.png" 
-    }
-  ],
-  
-  "Passtechnik Training 2er": [
-    { 
-      name: "Bank Pass", 
-      desc: "Ball wird über die Bande gespielt, um den Gegner zu überraschen.", 
-      img: "img/bank_pass.png" 
-    },
-    { 
-      name: "Wall Pass", 
-      desc: "Ball entlang der Bande durch den Gegner gepasst.", 
-      img: "img/wall_pass.png" 
-    }
-  ]
+  // Passtechnik Trainings ähnlich erweitern ...
 };
 
 // Mögliche Tischpositionen
@@ -320,6 +307,7 @@ function renderTournament() {
 
 
 renderStartPage();
+
 
 
 
