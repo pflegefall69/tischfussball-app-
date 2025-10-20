@@ -162,36 +162,51 @@ function renderTraining() {
 }
 
 
-// Trainingsbereich anzeigen
+// Trainingsbereich mit Buttons für Schüsse in der 3er-Reihe
 function startTraining(name) {
-  const exercises = trainingsData[name] || [];
+  const training = trainingsData[name];
+  if (!training) return;
 
-  // Generiere die Liste der Übungen
   let html = `<h2>${name}</h2>`;
-  html += `<ul>`;
-  exercises.forEach((exercise, i) => {
-    html += `
-      <li style="margin-bottom: 1rem; cursor: pointer;" onclick="showExercise('${name}', ${i})">
-        ${exercise.name}
-      </li>
-    `;
+  html += `<p>Klicke auf einen Schuss, um Startposition, Zielposition, Ballführer und Schützen zu generieren:</p>`;
+  html += `<div style="display:flex; flex-wrap:wrap; gap:10px; justify-content:center;">`;
+
+  training.forEach((shot, index) => {
+    html += `<button onclick="showShotInfo(${index}, '${name}')">${shot.name}</button>`;
   });
-  html += `</ul>`;
-  html += `<div id="exerciseDetails" style="margin-top: 20px;"></div>`;
+
+  html += `</div>`;
+  html += `<div id="shotInfo" style="margin-top:20px; font-weight:bold;"></div>`;
   html += `<button style="margin-top: 20px;" onclick="renderTraining()">Zurück</button>`;
 
   app.innerHTML = html;
 }
 
-// Einzelne Übung anzeigen
-function showExercise(trainingName, index) {
-  const exercise = trainingsData[trainingName][index];
-  const detailsDiv = document.getElementById("exerciseDetails");
-  detailsDiv.innerHTML = `
-    <h3>${exercise.name}</h3>
-    <p>${exercise.desc}</p>
-    ${exercise.img ? `<img src="${exercise.img}" alt="${exercise.name}" style="max-width: 400px; margin-top: 10px;">` : ""}
+// Zeigt Info zu einem Schuss mit zufälligen Positionen und Spielern
+function showShotInfo(index, trainingName) {
+  const shot = trainingsData[trainingName][index];
+
+  // Zufällige Start- und Zielposition
+  const start = randomPosition();
+  let target = randomPosition();
+  while(target === start) target = randomPosition();
+
+  // Zufälliger ballführender Spieler und Schütze aus 3er-Reihe
+  let ballHandler = threeRowPlayers[Math.floor(Math.random() * threeRowPlayers.length)];
+  let shooter = threeRowPlayers[Math.floor(Math.random() * threeRowPlayers.length)];
+  while(shooter === ballHandler) {
+    shooter = threeRowPlayers[Math.floor(Math.random() * threeRowPlayers.length)];
+  }
+
+  const infoHtml = `
+    <p><strong>Schusstechnik:</strong> ${shot.name}</p>
+    <p>${shot.desc}</p>
+    <p><strong>Startposition:</strong> ${start} &nbsp; <strong>Zielposition:</strong> ${target}</p>
+    <p><strong>Ballführender Spieler:</strong> ${ballHandler} &nbsp; <strong>Schütze:</strong> ${shooter}</p>
+    ${shot.img ? `<img src="${shot.img}" alt="${shot.name}" />` : ""}
   `;
+
+  document.getElementById("shotInfo").innerHTML = infoHtml;
 }
 
 
@@ -305,6 +320,7 @@ function renderTournament() {
 
 
 renderStartPage();
+
 
 
 
