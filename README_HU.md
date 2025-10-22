@@ -1,3 +1,6 @@
+# Tischfußball-App
+
+[Direkt zur App](https://tischfussball-app.vercel.app/)
 Asztalifoci alkalmazás
 
 
