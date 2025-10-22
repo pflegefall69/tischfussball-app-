@@ -1,1 +1,69 @@
-
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Tischfussball App — To‑Do Liste für Features</title>
+<meta name="description" content="Übersicht der noch zu implementierenden Features der Tischfussball App">
+<style>
+body {
+font-family: Arial, sans-serif;
+background: #f6f6f6;
+margin: 0;
+padding: 2rem;
+}
+h1 {
+text-align: center;
+}
+ul {
+list-style-type: none;
+padding: 0;
+max-width: 700px;
+margin: 2rem auto;
+background: white;
+border-radius: 12px;
+box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+li {
+padding: 1rem 1.5rem;
+border-bottom: 1px solid #eee;
+display: flex;
+align-items: center;
+justify-content: space-between;
+}
+li:last-child {
+border-bottom: none;
+}
+input[type="checkbox"] {
+margin-right: 1rem;
+}
+label {
+flex-grow: 1;
+}
+</style>
+</head>
+<body>
+<h1>🧩 To‑Do Liste — Tischfussball App</h1>
+<ul>
+<li>
+<input type="checkbox" id="todo1">
+<label for="todo1">ShowShotInfo für 5er- und 2er-Pass sowie Schusstraining hinzufügen</label>
+</li>
+<li>
+<input type="checkbox" id="todo2">
+<label for="todo2">Animation für Schusstraining (3er) hinzufügen</label>
+</li>
+<li>
+<input type="checkbox" id="todo3">
+<label for="todo3">Generierung von Schuss- und Zielposition überarbeiten — externer Random-Sim generiert zwei Positionen, die anschließend auf Kompatibilität mit der gewählten Schusstechnik geprüft werden. Nur gültige Paare werden übernommen oder neu generiert, bis ein passendes Paar entsteht.</label>
+</li>
+<li>
+<input type="checkbox" id="todo4">
+<label for="todo4">Herstellerlinks untereinander anordnen</label>
+</li>
+</ul>
+<div class="button-container">
+<a href="/" class="home-button">⬅️ Zurück zur Startseite</a>
+</div>
+</body>
+</html>
