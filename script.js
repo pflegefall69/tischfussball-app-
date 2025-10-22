@@ -5,7 +5,6 @@ let teams = [];
 let matches = [];
 let extras = [];
 
-
 const learningLinks = [
   { label: "kicker-klaus", url: "https://kicker-klaus.de/?srsltid=AfmBOopLCoc6FaqguC586p0foKIhJP2bZvEcBJlvPTEI0Lgw10VD_pH2" },
   { label: "leonhart", url: "https://original-leonhart.com/" },
@@ -14,6 +13,13 @@ const learningLinks = [
   { label: "tornado", url: "https://tornadofoosball.com/" },
   { label: "garlando/kicker-sven", url: "https://kicker-sven.de/kicker-marken-garlando"},
   { label: "roberto-sport/kicker-sven", url: "https://kicker-sven.de/kicker-marken-roberto-sport"}  
+];
+const readmeLinks = [
+  { label: "عربي", url: "https://github.com/pflegefall69/tischfussball-app-/blob/main/README_ARA.md" },
+  { label: "deutsch", url: "https://github.com/pflegefall69/tischfussball-app-/blob/main/README.md" },
+  { label: "magyar", url: "https://github.com/pflegefall69/tischfussball-app-/blob/main/README_HU.md" },
+  { label: "ไทย", url: "https://github.com/pflegefall69/tischfussball-app-/blob/main/README_TH.md" },
+  { label: "Русский", url: "https://github.com/pflegefall69/tischfussball-app-/blob/main/README_RU.md" }  
 ];
 const threeRowPlayers = ["GM9", "GM10", "GM11"];
 
@@ -92,7 +98,8 @@ function renderStartPage() {
       <button onclick="renderLeaderInput()">Turnierbereich</button>
       <button onclick="openLearn()">Lernbereich</button>
       <button onclick="renderTraining()">Trainingsbereich</button>
-	  <button onclick="openTodo()">Todo</button>	  
+	  <button onclick="openTodo">Todo</button>
+	  <button onclick="renderReadMeButtons">Readme</button>	  
       ${renderLearningButtons()}
     </div>    
   `;
@@ -102,6 +109,15 @@ function renderStartPage() {
 function renderLearningButtons() {
   let html = '<div style="margin-top:10px;">';
   learningLinks.forEach(link => {
+    html += `<button onclick="window.open('${link.url}', '_blank')">${link.label}</button> `;
+  });
+  html += '</div>';
+  return html;
+}
+// Render the Readme buttons
+function renderReadMeButtons() {
+  let html = '<div style="margin-top:10px;">';
+  readmeLinks.forEach(link => {
     html += `<button onclick="window.open('${link.url}', '_blank')">${link.label}</button> `;
   });
   html += '</div>';
@@ -353,7 +369,6 @@ function renderTournament() {
 
 
 renderStartPage();
-
 
 
 
