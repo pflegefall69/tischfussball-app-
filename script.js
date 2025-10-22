@@ -99,7 +99,7 @@ function renderStartPage() {
       <button onclick="openLearn()">Lernbereich</button>
       <button onclick="renderTraining()">Trainingsbereich</button>
 	  <button onclick="openTodo">Todo</button>
-	  <button onclick="renderReadMeButtons">Readme</button>	  
+	  <button onclick="renderReadMeButtons()">Readme</button>	  
       ${renderLearningButtons()}
     </div>    
   `;
@@ -369,6 +369,7 @@ function renderTournament() {
 
 
 renderStartPage();
+
 
 
 
