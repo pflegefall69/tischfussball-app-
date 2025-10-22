@@ -13,7 +13,7 @@ const learningLinks = [
   { label: "bonzini", url: "https://www.bonzini.com/en/" },
   { label: "tornado", url: "https://tornadofoosball.com/" },
   { label: "garlando/kicker-sven", url: "https://kicker-sven.de/kicker-marken-garlando"},
-  { label: "roberto-sport/kicker-sven", url: "https://kicker-sven.de/kicker-marken-roberto-sport"}
+  { label: "roberto-sport/kicker-sven", url: "https://kicker-sven.de/kicker-marken-roberto-sport"}  
 ];
 const threeRowPlayers = ["GM9", "GM10", "GM11"];
 
@@ -91,7 +91,8 @@ function renderStartPage() {
     <div style="margin-top: 20px;">
       <button onclick="renderLeaderInput()">Turnierbereich</button>
       <button onclick="openLearn()">Lernbereich</button>
-      <button onclick="renderTraining()">Trainingsbereich</button> 
+      <button onclick="renderTraining()">Trainingsbereich</button>
+	  <button onclick="openTodo">Todo</button>	  
       ${renderLearningButtons()}
     </div>    
   `;
@@ -109,6 +110,10 @@ function renderLearningButtons() {
 // Function to open the learning page
 function openLearn() {
   window.open("learn.html", "_blank");
+}
+// Function to open the toDo page
+function openTodo() {
+  window.open("todo.html", "_blank");
 }
 
 // Render the first input screen
@@ -348,7 +353,6 @@ function renderTournament() {
 
 
 renderStartPage();
-
 
 
 
