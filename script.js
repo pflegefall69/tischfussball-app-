@@ -99,9 +99,9 @@ function renderStartPage() {
       <button onclick="openLearn()">Lernbereich</button>
       <button onclick="renderTraining()">Trainingsbereich</button>
 	  <button onclick="openTodo">Todo</button>
-	  <button onclick="renderReadMeButtons()">Readme</button>	  
+	  <button onclick="renderReadmeSection()">Readme</button>	  
       ${renderLearningButtons()}
-    </div>    
+    </div>  	
   `;
 }
 
@@ -114,14 +114,18 @@ function renderLearningButtons() {
   html += '</div>';
   return html;
 }
-// Render the Readme buttons
-function renderReadMeButtons() {
-  let html = '<div style="margin-top:10px;">';
-  readmeLinks.forEach(link => {
-    html += `<button onclick="window.open('${link.url}', '_blank')">${link.label}</button> `;
-  });
-  html += '</div>';
-  return html;
+// Die readme sektion rendern
+function renderReadmeSection() {
+  app.innerHTML = `
+    <h2>README Dateien</h2>
+    <p>Wähle die gewünschte Sprache:</p>
+    <div style="margin-top: 10px;">
+      ${readmeLinks.map(link => 
+        `<button onclick="window.open('${link.url}', '_blank')">${link.label}</button>`
+      ).join(" ")}
+    </div>
+    <button style="margin-top: 20px;" onclick="renderStartPage()">Zurück zur Startseite</button>
+  `;
 }
 // Function to open the learning page
 function openLearn() {
@@ -206,7 +210,9 @@ function startTraining(name) {
 
   app.innerHTML = html;
 }
-
+function showReadmeButtons() {
+  document.getElementById("readmeButtonsContainer").innerHTML = renderReadMeButtons();
+}
 
 function showShotInfo(index, trainingName) {
   const shot = trainingsData[trainingName][index];
@@ -369,7 +375,6 @@ function renderTournament() {
 
 
 renderStartPage();
-
 
 
 
