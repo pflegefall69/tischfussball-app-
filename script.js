@@ -98,7 +98,7 @@ function renderStartPage() {
       <button onclick="renderLeaderInput()">Turnierbereich</button>
       <button onclick="openLearn()">Lernbereich</button>
       <button onclick="renderTraining()">Trainingsbereich</button>
-	  <button onclick="openTodo">Todo</button>
+	  <button onclick="openTodo()">Todo</button>
 	  <button onclick="renderReadmeSection()">Readme</button>	  
       ${renderLearningButtons()}
     </div>  	
