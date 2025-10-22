@@ -20,7 +20,9 @@ const readmeLinks = [
   { label: "magyar", url: "https://github.com/pflegefall69/tischfussball-app-/blob/main/README_HU.md" },
   { label: "ไทย", url: "https://github.com/pflegefall69/tischfussball-app-/blob/main/README_TH.md" },
   { label: "Русский", url: "https://github.com/pflegefall69/tischfussball-app-/blob/main/README_RU.md" },
-  { label: "shqip", url: "https://github.com/pflegefall69/tischfussball-app-/blob/main/README_SK.md" } 
+  { label: "shqip", url: "https://github.com/pflegefall69/tischfussball-app-/blob/main/README_SK.md" },
+  { label: "हिंदी", url: "https://github.com/pflegefall69/tischfussball-app-/blob/main/README_HI.md" }
+  
 ];
 const threeRowPlayers = ["GM9", "GM10", "GM11"];
 
@@ -376,7 +378,6 @@ function renderTournament() {
 
 
 renderStartPage();
-
 
 
 
