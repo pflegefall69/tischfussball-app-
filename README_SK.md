@@ -7,7 +7,7 @@
 ## 🧠 Seksioni i Mësimit
 
 
-**Seksioni i mësimit** ofron një përmbledhje të strukturuar të teknikave kryesore të futbollit të tavolinës.
+**Seksioni i mësimit**(Lernbereich) ofron një përmbledhje të strukturuar të teknikave kryesore të futbollit të tavolinës.
 Këtu lojtarët mund të zgjedhin përmbajtje trajnimi të synuar dhe të mësojnë teknika themelore ose të avancuara të lojës.
 
 ### Kategoritë
@@ -32,7 +32,7 @@ Këtu lojtarët mund të zgjedhin përmbajtje trajnimi të synuar dhe të mësoj
 
 ## 🎯 Seksioni i Trajnimit
 
-Në **seksionin e trajnimit**, teknikat nga seksioni i mësimit mund të aplikohen në praktikë.
+Në **seksionin e trajnimit**(Trainingsbereich), teknikat nga seksioni i mësimit mund të aplikohen në praktikë.
 Për çdo teknikë goditjeje mund të gjenerohen pozicioni fillestar dhe ai final, lojtari që kontrollon topin dhe gjuajtësi.
 Kjo lejon simulimin e situatave të lojës dhe trajnim të synuar për të përmirësuar teknikën dhe precizionin.
 
@@ -40,7 +40,7 @@ Kjo lejon simulimin e situatave të lojës dhe trajnim të synuar për të përm
 
 ## 🏆 Seksioni i Turneut
 
-**Seksioni i turneut** mundëson organizimin e turneve të thjeshtuara.
+**Seksioni i turneut**(Turnierbereich) mundëson organizimin e turneve të thjeshtuara.
 Lojtarët mund të regjistrohen, të formohen automatikisht në ekipe dhe të caktohen për ndeshje.
 Rezultatet mund të regjistrohen direkt, dhe bazuar në rezultatet e lojtarëve krijohet një renditje.
 Gjithashtu, automatikisht caktohen role si gjyqtar, ndihmës dhe pi sipas numrit të pjesëmarrësve dhe drejtimit të turneut.
