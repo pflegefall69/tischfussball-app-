@@ -86,10 +86,10 @@ ahol a megfelelő felszerelés (asztalok, figurák, rudak, labdák stb.) beszere
 
 Elérhető gyártói linkek
 
-Kicker-Klaus
-Leonhart
-Ullrich Sport
-Bonzini
-Tornado
-Garlando / Kicker-Sven
-Roberto Sport / Kicker-Sven
+- [Kicker-Klaus](https://kicker-klaus.de/?srsltid=AfmBOopLCoc6FaqguC586p0foKIhJP2bZvEcBJlvPTEI0Lgw10VD_pH2)  
+- [Leonhart](https://original-leonhart.com/)  
+- [Ullrich Sport](https://shop.ullrichsport.com/)  
+- [Bonzini](https://www.bonzini.com/en/)  
+- [Tornado](https://tornadofoosball.com/)  
+- [Garlando / Kicker-Sven](https://kicker-sven.de/kicker-marken-garlando)  
+- [Roberto Sport / Kicker-Sven](https://kicker-sven.de/kicker-marken-roberto-sport)
