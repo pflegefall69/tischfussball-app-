@@ -5,7 +5,7 @@ let teams = [];
 let matches = [];
 let extras = [];
 
-const learningLinks = [
+const manufacturerLinks = [
   { label: "kicker-klaus", url: "https://kicker-klaus.de/?srsltid=AfmBOopLCoc6FaqguC586p0foKIhJP2bZvEcBJlvPTEI0Lgw10VD_pH2" },
   { label: "leonhart", url: "https://original-leonhart.com/" },
   { label: "ullrichsport", url: "https://shop.ullrichsport.com/" },
@@ -108,11 +108,10 @@ function renderStartPage() {
   `;
 }
 
-// Render the link buttons
-function renderLearningButtons() {
+function renderManufacturerButtons() {
   let html = '<div style="margin-top:10px;">';
-  learningLinks.forEach(link => {
-    html += `<button onclick="window.open('${link.url}', '_blank')">${link.label}</button> `;
+  manufacturerLinks.forEach(link => {
+    html += `<button style="display:block; margin-bottom:5px;" onclick="window.open('${link.url}', '_blank')">${link.label}</button>`;
   });
   html += '</div>';
   return html;
@@ -378,6 +377,7 @@ function renderTournament() {
 
 
 renderStartPage();
+
 
 
 
