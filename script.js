@@ -103,7 +103,7 @@ function renderStartPage() {
       <button onclick="renderTraining()">Trainingsbereich</button>
 	  <button onclick="openTodo()">Todo</button>
 	  <button onclick="renderReadmeSection()">Readme</button>	  
-      ${renderLearningButtons()}
+      ${renderManufacturerButtons()}
     </div>  	
   `;
 }
@@ -377,6 +377,7 @@ function renderTournament() {
 
 
 renderStartPage();
+
 
 
 
