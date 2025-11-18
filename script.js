@@ -226,12 +226,16 @@ function showShotInfo(index, trainingName) {
     start = positions[Math.floor(Math.random() * positions.length)];
     let startIndex = positions.indexOf(start);
     const possibleTargets = positions.slice(0, startIndex);
-    target = possibleTargets.length > 0 ? possibleTargets[Math.floor(Math.random() * possibleTargets.length)] : start;
+    target = possibleTargets.length > 0 ? 
+      possibleTargets[Math.floor(Math.random() * possibleTargets.length)] : 
+      start;
   } else if (shot.name.includes("Pull")) {
     start = positions[Math.floor(Math.random() * positions.length)];
     let startIndex = positions.indexOf(start);
     const possibleTargets = positions.slice(startIndex + 1);
-    target = possibleTargets.length > 0 ? possibleTargets[Math.floor(Math.random() * possibleTargets.length)] : start;
+    target = possibleTargets.length > 0 ? 
+      possibleTargets[Math.floor(Math.random() * possibleTargets.length)] : 
+      start;
   } else {
     start = positions[Math.floor(Math.random() * positions.length)];
     do {
@@ -254,12 +258,20 @@ function showShotInfo(index, trainingName) {
         <strong>Schütze:</strong> ${shooter}
       </p>
 
-      <!-- Container für Diagramm mit dunklem Hintergrund -->
-      <div style="background-color:#222; padding:15px; border-radius:10px; margin-top:20px; text-align:center;">
-        <img src="3barshots.svg" alt="3er Reihe Diagramm" style="max-width:90%; height:auto;" />
+      <!-- SVG wird hier inline eingefügt -->
+      <div id="svgContainer" 
+           class="learning-section" 
+           style="padding:15px; border-radius:10px; margin-top:20px; text-align:center;">
       </div>
     </div>
   `;
+
+  document.getElementById("shotInfo").innerHTML = infoHtml;
+
+  // SVG inline einbetten (Farbkontrolle durch CSS!)
+  inlineSvg("#svgContainer", "3barshots.svg", "svg-accent");
+}
+
 
   document.getElementById("shotInfo").innerHTML = infoHtml;
 }
@@ -377,6 +389,7 @@ function renderTournament() {
 
 
 renderStartPage();
+
 
 
 
