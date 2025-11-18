@@ -189,20 +189,30 @@ function renderTraining() {
 function startTraining(name) {
   const training = trainingsData[name];
 
-  // Wenn das Training noch nicht vollständig implementiert ist
-  if (name === "Passtechnik Training 5er" || name === "Passtechnik Training 2er") {
-    let html = `<h2>${name}</h2>`;
-    html += `
-      <div style="margin-top:30px; padding:20px; background:#222; color:#fff; border-radius:10px; max-width:600px; margin-left:auto; margin-right:auto;">
-        <p style="font-size:1.1em; text-align:center;">
-          Dieses Training wird noch erstellt 🔧
-        </p>
-      </div>
-      <button style="margin-top: 40px;" onclick="renderTraining()">Zurück</button>
-    `;
-    app.innerHTML = html;
-    return; // restliche Funktion überspringen
-  }
+  if (!training) return;
+
+  let html = `<h2>${name}</h2>`;
+  html += `<p>Klicke auf einen Schuss, um Startposition, Zielposition, Ballführer und Schützen zu generieren:</p>`;
+  html += `<div id="shotButtons" style="display:flex; flex-wrap:wrap; gap:10px; justify-content:center;">`;
+
+  training.forEach((shot, index) => {
+    html += `<button class="shot-btn" data-index="${index}">${shot.name}</button>`;
+  });
+
+  html += `</div>`;
+  html += `<div id="shotInfo" style="margin-top:20px; font-weight:bold;"></div>`;
+  html += `<button style="margin-top: 20px;" onclick="renderTraining()">Zurück</button>`;
+
+  app.innerHTML = html;
+
+  // Event Listener setzen
+  document.querySelectorAll('.shot-btn').forEach(btn => {
+    btn.addEventListener('click', e => {
+      const index = parseInt(e.target.dataset.index);
+      showShotInfo(index, name);  // name wird jetzt sicher übergeben
+    });
+  });
+}
 
   // Wenn Trainingsdaten vorhanden, normale Anzeige
   if (!training) return;
@@ -385,6 +395,7 @@ function renderTournament() {
 
 
 renderStartPage();
+
 
 
 
