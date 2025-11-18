@@ -212,69 +212,50 @@ function startTraining(name) {
 
   app.innerHTML = html;
 }
-function showReadmeButtons() {
-  document.getElementById("readmeButtonsContainer").innerHTML = renderReadMeButtons();
-}
-
-function showShotInfo(index, trainingName) {
-  const shot = trainingsData[trainingName][index];
-
-  let start, target;
-
-  // Push/Pull Logik
-  if (shot.name.includes("Push")) {
-    start = positions[Math.floor(Math.random() * positions.length)];
-    let startIndex = positions.indexOf(start);
-    const possibleTargets = positions.slice(0, startIndex);
-    target = possibleTargets.length > 0 ? 
-      possibleTargets[Math.floor(Math.random() * possibleTargets.length)] : 
-      start;
-  } else if (shot.name.includes("Pull")) {
-    start = positions[Math.floor(Math.random() * positions.length)];
-    let startIndex = positions.indexOf(start);
-    const possibleTargets = positions.slice(startIndex + 1);
-    target = possibleTargets.length > 0 ? 
-      possibleTargets[Math.floor(Math.random() * possibleTargets.length)] : 
-      start;
-  } else {
-    start = positions[Math.floor(Math.random() * positions.length)];
-    do {
-      target = positions[Math.floor(Math.random() * positions.length)];
-    } while (target === start);
-  }
-
-  const ballHandler = shot.ballHandler;
-  const shooter = shot.shooter;
-
-  const infoHtml = `
-    <div class="shot-item">
-      <p><strong>Schusstechnik:</strong> ${shot.name}</p>
-      <p class="positions">
-        <strong>Startposition:</strong> ${start} &nbsp; 
-        <strong>Zielposition:</strong> ${target}
-      </p>
-      <p class="positions">
-        <strong>Ballführender Spieler:</strong> ${ballHandler} &nbsp; 
-        <strong>Schütze:</strong> ${shooter}
-      </p>
-
-      <!-- SVG wird hier inline eingefügt -->
-      <div id="svgContainer" 
-           class="learning-section" 
-           style="padding:15px; border-radius:10px; margin-top:20px; text-align:center;">
-      </div>
-    </div>
-  `;
-
-  document.getElementById("shotInfo").innerHTML = infoHtml;
-
-  // SVG inline einbetten (Farbkontrolle durch CSS!)
-  inlineSvg("#svgContainer", "3barshots.svg", "svg-accent");
-}
-
-
-  document.getElementById("shotInfo").innerHTML = infoHtml;
-}
+function showShotInfo(index, trainingName) { 
+const shot = trainingsData[trainingName][index];
+let start, target; 
+// Push/Pull Logik 
+if (shot.name.includes("Push")) {
+	start = positions[Math.floor(Math.random() * positions.length)	];
+	let startIndex = positions.indexOf(start	);
+	const possibleTargets = positions.slice(0, startIndex);
+	target = possibleTargets.length > 0 ? 
+possibleTargets[Math.floor(Math.random() * possibleTargets.length)] :
+start; 
+} else if (shot.name.includes("Pull")) {
+	start = positions[Math.floor(Math.random() * positions.length)];
+	let startIndex = positions.indexOf(start);
+	const possibleTargets = positions.slice(startIndex + 1);
+	target = possibleTargets.length > 0 ?
+possibleTargets[Math.floor(Math.random() * possibleTargets.length)] :
+start; } else {
+	start = positions[Math.floor(Math.random() * positions.length)];
+	do { 
+	 target = positions[Math.floor(Math.random() * positions.length)];
+	 } while (target === start); 
+	 } 
+ const ballHandler = shot.ballHandler;
+ const shooter = shot.shooter;
+ const infoHtml = 
+ <div class="shot-item"> 
+  <p><strong>Schusstechnik:</strong> ${shot.name}</p>
+  <p class="positions"> 
+   <strong>Startposition:</strong> ${start} &nbsp; 
+   <strong>Zielposition:</strong> ${target} 
+   </p> 
+   <p class="positions">
+    <strong>Ballführender Spieler:</strong> ${ballHandler} &nbsp;
+	<strong>Schütze:</strong> ${shooter}
+	</p>
+	<!-- Container für Diagramm mit dunklem Hintergrund --> 
+	<div style="background-color:#222; padding:15px; border-radius:10px; margin-top:20px; text-align:center;"> 
+	<img src="3barshots.svg" alt="3er Reihe Diagramm" style="max-width:90%; height:auto;" />
+	</div>
+	</div>
+	;
+	document.getElementById("shotInfo").innerHTML = infoHtml; 
+	}
 
 
 
@@ -389,6 +370,7 @@ function renderTournament() {
 
 
 renderStartPage();
+
 
 
 
