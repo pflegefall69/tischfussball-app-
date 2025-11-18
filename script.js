@@ -231,8 +231,8 @@ function showShotInfo(index, trainingName) {
   const ballHandler = shot.ballHandler;
   const shooter = shot.shooter;
 
-  // SVG-Bild aus Projektordner anzeigen
-  const svgImgHtml = `<img src="3barsshots.svg" alt="3er Reihe Diagramm" style="max-width:300px; margin-top:10px;">`;
+  // Bild aus Projektordner
+  const imgHtml = `<img src="3barsshots.svg" alt="3er Reihe Diagramm" style="max-width:300px; margin-top:10px;">`;
 
   const infoHtml = `
     <div class="shot-item learning-section">
@@ -240,7 +240,7 @@ function showShotInfo(index, trainingName) {
       <p class="positions"><strong>Startposition:</strong> ${start} &nbsp; <strong>Zielposition:</strong> ${target}</p>
       <p class="positions"><strong>Ballführender Spieler:</strong> ${ballHandler} &nbsp; <strong>Schütze:</strong> ${shooter}</p>
       <div class="learning-section" style="margin-top:20px; text-align:center;">
-        ${svgImgHtml}
+        ${imgHtml}
       </div>
     </div>
   `;
@@ -361,6 +361,7 @@ function renderTournament() {
 
 
 renderStartPage();
+
 
 
 
