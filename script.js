@@ -257,7 +257,6 @@ function showShotInfo(index, trainingName) {
   const ballHandler = shot.ballHandler;
   const shooter = shot.shooter;
 
-  // Inline SVG für 3barshots, damit CSS greifen kann
   const svgInline = `
     <svg viewBox="0 0 300 50" xmlns="http://www.w3.org/2000/svg" class="svg-accent">
       <rect x="0" y="0" width="300" height="50" fill="currentColor" rx="8" ry="8"/>
@@ -278,8 +277,7 @@ function showShotInfo(index, trainingName) {
     </div>
   `;
 
-  document.getElementById("shotInfo").innerHTML = infoHtml;
-}
+  document.getElementById("shotInfo").i
 
 
 
@@ -395,6 +393,7 @@ function renderTournament() {
 
 
 renderStartPage();
+
 
 
 
