@@ -5,6 +5,15 @@ let teams = [];
 let matches = [];
 let extras = [];
 
+// Prüfen, ob schon eingebunden
+if (!document.getElementById('main-stylesheet')) {
+  const link = document.createElement('link');
+  link.rel = 'stylesheet';
+  link.href = 'styles.css';  // Pfad zu deiner CSS-Datei
+  link.id = 'main-stylesheet';
+  document.head.appendChild(link);
+}
+
 const manufacturerLinks = [
   { label: "kicker-klaus", url: "https://kicker-klaus.de/?srsltid=AfmBOopLCoc6FaqguC586p0foKIhJP2bZvEcBJlvPTEI0Lgw10VD_pH2" },
   { label: "leonhart", url: "https://original-leonhart.com/" },
@@ -214,17 +223,18 @@ function startTraining(name) {
 }
 function showShotInfo(index, trainingName) {
   const shot = trainingsData[trainingName][index];
+
   let start, target;
 
   // Push/Pull Logik
   if (shot.name.includes("Push")) {
     start = positions[Math.floor(Math.random() * positions.length)];
-    let startIndex = positions.indexOf(start);
+    const startIndex = positions.indexOf(start);
     const possibleTargets = positions.slice(0, startIndex);
     target = possibleTargets.length > 0 ? possibleTargets[Math.floor(Math.random() * possibleTargets.length)] : start;
   } else if (shot.name.includes("Pull")) {
     start = positions[Math.floor(Math.random() * positions.length)];
-    let startIndex = positions.indexOf(start);
+    const startIndex = positions.indexOf(start);
     const possibleTargets = positions.slice(startIndex + 1);
     target = possibleTargets.length > 0 ? possibleTargets[Math.floor(Math.random() * possibleTargets.length)] : start;
   } else {
@@ -237,25 +247,30 @@ function showShotInfo(index, trainingName) {
   const ballHandler = shot.ballHandler;
   const shooter = shot.shooter;
 
+  // Inline SVG für 3barshots, damit CSS greifen kann
+  const svgInline = `
+    <svg viewBox="0 0 300 50" xmlns="http://www.w3.org/2000/svg" class="svg-accent">
+      <rect x="0" y="0" width="300" height="50" fill="currentColor" rx="8" ry="8"/>
+      <text x="150" y="30" fill="white" font-size="18" font-family="sans-serif" text-anchor="middle">
+        3er Reihe Diagramm
+      </text>
+    </svg>
+  `;
+
   const infoHtml = `
-    <div class="shot-item">
+    <div class="shot-item learning-section">
       <p><strong>Schusstechnik:</strong> ${shot.name}</p>
-      <p class="positions">
-        <strong>Startposition:</strong> ${start} &nbsp; 
-        <strong>Zielposition:</strong> ${target}
-      </p>
-      <p class="positions">
-        <strong>Ballführender Spieler:</strong> ${ballHandler} &nbsp;
-        <strong>Schütze:</strong> ${shooter}
-      </p>
-      <div style="background-color:#222; padding:15px; border-radius:10px; margin-top:20px; text-align:center;">
-        <img src="3barshots.svg" alt="3er Reihe Diagramm" style="max-width:90%; height:auto;" />
+      <p class="positions"><strong>Startposition:</strong> ${start} &nbsp; <strong>Zielposition:</strong> ${target}</p>
+      <p class="positions"><strong>Ballführender Spieler:</strong> ${ballHandler} &nbsp; <strong>Schütze:</strong> ${shooter}</p>
+      <div class="learning-section" style="margin-top:20px; text-align:center;">
+        ${svgInline}
       </div>
     </div>
   `;
 
   document.getElementById("shotInfo").innerHTML = infoHtml;
 }
+
 
 
 
@@ -370,7 +385,6 @@ function renderTournament() {
 
 
 renderStartPage();
-
 
 
 
