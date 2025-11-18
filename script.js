@@ -231,7 +231,7 @@ function showShotInfo(index, trainingName) {
   const ballHandler = shot.ballHandler;
   const shooter = shot.shooter;
 
-  // SVG-Datei aus Projektordner
+  // SVG-Bild aus Projektordner anzeigen
   const svgImgHtml = `<img src="3barsshots.svg" alt="3er Reihe Diagramm" style="max-width:300px; margin-top:10px;">`;
 
   const infoHtml = `
@@ -247,7 +247,6 @@ function showShotInfo(index, trainingName) {
 
   document.getElementById("shotInfo").innerHTML = infoHtml;
 }
-
 
 
 
@@ -362,6 +361,7 @@ function renderTournament() {
 
 
 renderStartPage();
+
 
 
 
