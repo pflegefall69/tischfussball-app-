@@ -232,7 +232,7 @@ function showShotInfo(index, trainingName) {
   const shooter = shot.shooter;
 
   // Bild aus Projektordner
-  const imgHtml = `<img src="3barsshots.svg" alt="3er Reihe Diagramm" style="max-width:300px; margin-top:10px;">`;
+  const imgHtml = `<img src="3barshots.svg" alt="3er Reihe Diagramm" style="max-width:300px; margin-top:10px;">`;
 
   const infoHtml = `
     <div class="shot-item learning-section">
@@ -361,6 +361,7 @@ function renderTournament() {
 
 
 renderStartPage();
+
 
 
 
