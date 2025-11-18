@@ -5,14 +5,6 @@ let teams = [];
 let matches = [];
 let extras = [];
 
-// Prüfen, ob schon eingebunden
-if (!document.getElementById('main-stylesheet')) {
-  const link = document.createElement('link');
-  link.rel = 'stylesheet';
-  link.href = 'styles.css';  // Pfad zu deiner CSS-Datei
-  link.id = 'main-stylesheet';
-  document.head.appendChild(link);
-}
 
 const manufacturerLinks = [
   { label: "kicker-klaus", url: "https://kicker-klaus.de/?srsltid=AfmBOopLCoc6FaqguC586p0foKIhJP2bZvEcBJlvPTEI0Lgw10VD_pH2" },
@@ -188,7 +180,6 @@ function renderTraining() {
 // Trainingsbereich mit Buttons für Schüsse in der 3er-Reihe
 function startTraining(name) {
   const training = trainingsData[name];
-
   if (!training) return;
 
   let html = `<h2>${name}</h2>`;
@@ -213,6 +204,7 @@ function startTraining(name) {
     });
   });
 }
+
 function showShotInfo(index, trainingName) {
   const shot = trainingsData[trainingName][index];
 
@@ -370,6 +362,7 @@ function renderTournament() {
 
 
 renderStartPage();
+
 
 
 
