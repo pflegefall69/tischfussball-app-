@@ -1,13 +1,18 @@
+/* Grundlegendes Styling */
 body {
   font-family: sans-serif;
   padding: 20px;
   background: #f9f9f9;
   font-size: 48px;
-}
-h1 {
-  color: #333;
+  color: #111;
 }
 
+h1 {
+  color: #333;
+  text-align: center;
+}
+
+/* Turnier-/Shot-Info Bereich */
 #shotInfo {
   margin-top: 20px;
   font-weight: normal;
@@ -18,13 +23,18 @@ h1 {
   margin-right: auto;
 }
 
-#shotInfo img {
+#shotInfo img,
+#shotInfo object,
+#shotInfo svg {
   max-width: 100%;
+  height: auto;
   margin-top: 10px;
+  display: block;
   border-radius: 8px;
 }
+
 /* Farbvariablen für Light/Dark */
-:root{
+:root {
   --bg: #ffffff;
   --card-bg: #f9f9f9;
   --text: #111;
@@ -32,7 +42,7 @@ h1 {
 }
 
 @media (prefers-color-scheme: dark) {
-  :root{
+  :root {
     --bg: #0b0b0c;
     --card-bg: #222;
     --text: #efefef;
@@ -40,27 +50,75 @@ h1 {
   }
 }
 
-/* Erzwinge, dass Browser Farbschemata beachten */
+/* Erzwinge Browser Farbschemata */
 html { color-scheme: light dark; }
 
 /* Lernbereich Styling */
-.learning-section{
+.learning-section {
   background: var(--card-bg);
   color: var(--text);
   padding: 1rem;
   border-radius: 10px;
   max-width: 900px;
-  margin: 0 auto;
+  margin: 0 auto 2rem auto;
   box-shadow: 0 6px 20px rgba(0,0,0,0.12);
 }
 
-/* SVG Inline Styling: falls das SVG Klassen oder currentColor nutzt */
-.learning-section svg { width: 100%; height: auto; display:block; }
+/* Buttons */
+button {
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  margin: 0.2rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: var(--accent);
+  color: white;
+}
 
-/* Falls das SVG `currentColor` benutzt wollen wir kontrollieren können */
-.learning-section .svg-accent { color: var(--accent); }
+button:hover {
+  opacity: 0.85;
+}
 
-/* Falls du <img> beibehältst: keine Filter verwenden */
-img { filter: none !important; -webkit-filter: none !important; }
+/* Inline SVG Styling */
+.learning-section svg,
+.learning-section object {
+  width: 100%;
+  height: auto;
+  display: block;
+  margin-top: 10px;
+}
 
+/* Text-Positionen */
+.positions {
+  font-weight: bold;
+  margin-top: 0.5rem;
+}
 
+/* Bild Styling */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+  filter: none !important;
+  -webkit-filter: none !important;
+}
+
+/* Container für SVG Diagramme */
+#diagramContainer {
+  max-width: 600px;
+  margin: 20px auto;
+  text-align: center;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 10px;
+  background-color: var(--card-bg);
+}
+
+/* SVG in Diagramm Container */
+#diagramContainer svg,
+#diagramContainer object {
+  width: 100%;
+  height: auto;
+}
