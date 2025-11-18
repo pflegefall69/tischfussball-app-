@@ -277,7 +277,8 @@ function showShotInfo(index, trainingName) {
     </div>
   `;
 
-  document.getElementById("shotInfo").i
+ document.getElementById("shotInfo").innerHTML = infoHtml;
+}
 
 
 
@@ -393,6 +394,7 @@ function renderTournament() {
 
 
 renderStartPage();
+
 
 
 
