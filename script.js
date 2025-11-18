@@ -213,7 +213,6 @@ function startTraining(name) {
     });
   });
 }
-
 function showShotInfo(index, trainingName) {
   const shot = trainingsData[trainingName][index];
 
@@ -240,8 +239,8 @@ function showShotInfo(index, trainingName) {
   const ballHandler = shot.ballHandler;
   const shooter = shot.shooter;
 
-  // Bild verwenden statt Inline-SVG
-  const imgHtml = `<img src="${shot.img}" alt="${shot.name}" style="max-width:300px; margin-top:10px; border-radius:8px;">`;
+  // SVG-Datei aus Projektordner
+  const svgImgHtml = `<img src="3barsshots.svg" alt="3er Reihe Diagramm" style="max-width:300px; margin-top:10px;">`;
 
   const infoHtml = `
     <div class="shot-item learning-section">
@@ -249,7 +248,7 @@ function showShotInfo(index, trainingName) {
       <p class="positions"><strong>Startposition:</strong> ${start} &nbsp; <strong>Zielposition:</strong> ${target}</p>
       <p class="positions"><strong>Ballführender Spieler:</strong> ${ballHandler} &nbsp; <strong>Schütze:</strong> ${shooter}</p>
       <div class="learning-section" style="margin-top:20px; text-align:center;">
-        ${imgHtml}
+        ${svgImgHtml}
       </div>
     </div>
   `;
@@ -371,6 +370,7 @@ function renderTournament() {
 
 
 renderStartPage();
+
 
 
 
