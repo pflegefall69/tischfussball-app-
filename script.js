@@ -205,32 +205,15 @@ function startTraining(name) {
 
   app.innerHTML = html;
 
-  // Event Listener setzen
+  // Event Listener für Buttons setzen
   document.querySelectorAll('.shot-btn').forEach(btn => {
     btn.addEventListener('click', e => {
       const index = parseInt(e.target.dataset.index);
-      showShotInfo(index, name);  // name wird jetzt sicher übergeben
+      showShotInfo(index, name);
     });
   });
 }
 
-  // Wenn Trainingsdaten vorhanden, normale Anzeige
-  if (!training) return;
-
-  let html = `<h2>${name}</h2>`;
-  html += `<p>Klicke auf einen Schuss, um Startposition, Zielposition, Ballführer und Schützen zu generieren:</p>`;
-  html += `<div style="display:flex; flex-wrap:wrap; gap:10px; justify-content:center;">`;
-
-  training.forEach((shot, index) => {
-    html += `<button onclick="showShotInfo(${index}, '${name}')">${shot.name}</button>`;
-  });
-
-  html += `</div>`;
-  html += `<div id="shotInfo" style="margin-top:20px; font-weight:bold;"></div>`;
-  html += `<button style="margin-top: 20px;" onclick="renderTraining()">Zurück</button>`;
-
-  app.innerHTML = html;
-}
 function showShotInfo(index, trainingName) {
   const shot = trainingsData[trainingName][index];
 
@@ -394,6 +377,7 @@ function renderTournament() {
 
 
 renderStartPage();
+
 
 
 
