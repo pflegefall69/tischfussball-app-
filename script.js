@@ -240,14 +240,8 @@ function showShotInfo(index, trainingName) {
   const ballHandler = shot.ballHandler;
   const shooter = shot.shooter;
 
-  const svgInline = `
-    <svg viewBox="0 0 300 50" xmlns="http://www.w3.org/2000/svg" class="svg-accent">
-      <rect x="0" y="0" width="300" height="50" fill="currentColor" rx="8" ry="8"/>
-      <text x="150" y="30" fill="white" font-size="18" font-family="sans-serif" text-anchor="middle">
-        3er Reihe Diagramm
-      </text>
-    </svg>
-  `;
+  // Bild verwenden statt Inline-SVG
+  const imgHtml = `<img src="${shot.img}" alt="${shot.name}" style="max-width:300px; margin-top:10px; border-radius:8px;">`;
 
   const infoHtml = `
     <div class="shot-item learning-section">
@@ -255,12 +249,12 @@ function showShotInfo(index, trainingName) {
       <p class="positions"><strong>Startposition:</strong> ${start} &nbsp; <strong>Zielposition:</strong> ${target}</p>
       <p class="positions"><strong>Ballführender Spieler:</strong> ${ballHandler} &nbsp; <strong>Schütze:</strong> ${shooter}</p>
       <div class="learning-section" style="margin-top:20px; text-align:center;">
-        ${svgInline}
+        ${imgHtml}
       </div>
     </div>
   `;
 
- document.getElementById("shotInfo").innerHTML = infoHtml;
+  document.getElementById("shotInfo").innerHTML = infoHtml;
 }
 
 
@@ -377,6 +371,7 @@ function renderTournament() {
 
 
 renderStartPage();
+
 
 
 
